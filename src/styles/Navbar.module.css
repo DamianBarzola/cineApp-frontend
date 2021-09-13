@@ -1,0 +1,114 @@
+:root{
+  --pink:#e91e63
+}
+.nav{
+    background: black;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem calc((100vw - 1000px) / 3);
+  z-index: 10;
+}
+.logo{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 100%;
+    cursor: pointer;
+}
+.navLink{  
+  transition: all 0.3s ease;
+    color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.navLink:hover{
+    color: var(--pink);
+}
+.bars{
+    display: none;
+  color: #fff;
+}
+.navmenu{
+    display: flex;
+  align-items: center;
+  margin-right: -24px;
+  
+}
+  .navbtn{
+    display: flex;
+    align-items: center;
+    margin-right: 24px;
+    
+  }
+
+
+  .NavBtnLink{
+    border-radius: 5px;
+    background: var(--pink);
+    padding: 10px 22px;
+    color: #fff;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    
+  }
+  .NavBtnLink:hover {
+    transition: all 0.2s ease-in-out;
+    background: #fff;
+    color: #010606;
+  }
+  .navmenuMovil{
+    display: flex;
+  align-items: center;
+  margin-right: -24px;
+  }
+  @media screen and (max-width: 768px) {
+    .navbtn{display: none;}
+    .bars{display: block;
+        position: absolute;
+        text-align: center;
+        justify-content: center;
+        top: 0;
+        right: 0;
+        transform: translate(-100%, 100%);
+        font-size: 2.6rem;
+        cursor: pointer;}
+      .bars:hover{
+          color: var(--pink);          
+        }
+
+    .navmenu{
+            display: none;
+        }
+      .navLink{
+          font-size: 1.4rem;
+          margin-top: 15px;
+          margin-bottom: 15px;
+          
+        }
+        .navLink:hover{
+          color: black;
+        }
+    .navmenuMovil{
+      position: absolute;
+      display: block;
+      list-style: none;
+      background-color: var(--pink);
+      left: 0;
+      z-index: 10;
+      top: 15%;
+      transition: all 0.5 ease-out;
+      width: 100%;    
+      
+      
+
+    }
+  }
