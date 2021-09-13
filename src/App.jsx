@@ -16,21 +16,11 @@ const App = () => {
       </header>
       <main>
         <Switch>
-          <Route exact path="/movies/:movieId">
-            <MovieDetails />
-          </Route>
-          <Route exact path="/movies">
-            <Movies />
-          </Route>
-          <Route exact path="/comingsoon">
-            <ComingSoon />
-          </Route>
-          <Route exact path="/contact">
-            <Contact />
-          </Route>
-          <Route path="/">
-            <Landing />
-          </Route>
+          <Route exact path="/movies/:movieId" component={MovieDetails} />
+          <Route exact path="/movies" component={Movies} />
+          <Route exact path="/comingsoon" component={ComingSoon} />
+          <Route exact path="/contact" component={Contact} />
+          <Route path="/" component={Landing} />
         </Switch>
       </main>
       <footer>
