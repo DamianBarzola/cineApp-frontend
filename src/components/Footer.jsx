@@ -10,7 +10,7 @@ const Footer = () => {
     <>
       <div class={style.footer}>
         <div class={style.container}>
-          <div class={style.row}>
+          <div class={style.rowFooter}>
             <div class={style.footerCol}>
               <h4 class={style.title}>Sobre Nosotros</h4>
               <p class={style.about}>
@@ -20,7 +20,7 @@ const Footer = () => {
                 temporibus, reiciendis nobis animi atque ipsam nostrum!
               </p>
             </div>
-            <div class={style.footerCol}>
+            <div class={style.footerCol + " ms-md-5"}>
               <h4 class={style.title}>Mapa del Sitio</h4>
               <ul>
                 <li>
@@ -45,13 +45,13 @@ const Footer = () => {
                 </li>
 
                 <li>
-                  <Link class={style.link} to="#">
-                    Otra Cosa
+                  <Link class={style.link} to="/abm">
+                    Administrador
                   </Link>
                 </li>
               </ul>
             </div>
-            <div class={style.footerCol}>
+            <div class={style.footerCol + " ps-md-5"}>
               <h4 class={style.title}>Contáctanos</h4>
               <div class="social-links">
                 <a

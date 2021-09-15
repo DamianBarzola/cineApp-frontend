@@ -38,7 +38,7 @@ const Navbar = () => {
           </Link>
         </div>
         <nav className={styles.navbtn}>
-          <Link to="/signin" className={styles.NavBtnLink}>
+          <Link to="/tickets" className={styles.NavBtnLink}>
             Boleteria Online
           </Link>
         </nav>
