@@ -9,50 +9,48 @@ const Contact = () => {
       <div className={style.col}>
         <form className={style.form + " p-4"} action="">
           <div className={style.title}>
-            <p>
-              <h2>
-                {" "}
-                <FiMail className={style.icon} />
-                Contacto
-              </h2>
-            </p>
+            <h2>
+              {" "}
+              <FiMail className={style.icon} />
+              Contacto
+            </h2>
           </div>
 
           <input
-            class="form-control me-2 mt-3"
+            className="form-control me-2 mt-3"
             type="text"
             placeholder="Nombre Completo"
             name="nombre"
-            minlength="4"
-            maxlength="40"
+            minLength="4"
+            maxLength="40"
             pattern="[A-Za-z0-9_-\s]{1,20}"
             required
           />
           <input
-            class="form-control me-2 mt-3"
+            className="form-control me-2 mt-3"
             type="email"
             placeholder="Correo Electrónico"
             name="email"
-            minlength="4"
-            maxlength="40"
+            minLength="4"
+            maxLength="40"
             required
           />
           <input
-            class="form-control me-2 mt-3"
+            className="form-control me-2 mt-3"
             type="text"
             placeholder="Asunto"
-            minlength="1"
-            maxlength="40"
+            minLength="1"
+            maxLength="40"
             pattern="[A-Za-z0-9_-\s]{1,20}"
             name="asunto"
             required
           />
           <textarea
-            class="form-control me-2 mt-3 "
+            className="form-control me-2 mt-3 "
             placeholder="Mensaje"
             rows="5"
-            minlength="1"
-            maxlength="500"
+            minLength="1"
+            maxLength="500"
             pattern="[A-Za-z0-9_-\s]{1,20}"
             name="mensaje"
             required

@@ -16,7 +16,7 @@ const Tickets = () => {
                 <h1>Boleteria</h1>
                 <div>
                   <select
-                    class="form-select bg-secondary m-2"
+                    className="form-select bg-secondary m-2"
                     aria-label="Default select example"
                   >
                     <option selected>Pelicula</option>
@@ -28,7 +28,7 @@ const Tickets = () => {
 
                 <div>
                   <select
-                    class="form-select bg-secondary m-2"
+                    className="form-select bg-secondary m-2"
                     aria-label="Default select example"
                   >
                     <option selected>Dia</option>
@@ -39,7 +39,7 @@ const Tickets = () => {
                 </div>
                 <div>
                   <select
-                    class="form-select bg-secondary m-2"
+                    className="form-select bg-secondary m-2"
                     aria-label="Default select example"
                     required
                   >
@@ -51,7 +51,7 @@ const Tickets = () => {
                 </div>
                 <div>
                   <select
-                    class="form-select bg-secondary m-2"
+                    className="form-select bg-secondary m-2"
                     aria-label="Default select example"
                   >
                     <option selected>Butaca</option>

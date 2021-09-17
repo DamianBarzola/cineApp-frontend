@@ -28,9 +28,9 @@ const ABMs = () => {
           <hr />
           <div className="bg-dark pt-1">
             {" "}
-            <div class="tabs ">
-              <ul role="tablist" class={styles.tabsList}>
-                <li class="tabs_tab-list-item" role="presentation">
+            <div className="tabs ">
+              <ul role="tablist" className={styles.tabsList}>
+                <li className="tabs_tab-list-item" role="presentation">
                   <button
                     className={
                       activeTab === "1"
@@ -43,12 +43,12 @@ const ABMs = () => {
                     aria-controls="i0-Section1"
                     aria-selected="false"
                     role="tab"
-                    tabindex="-1"
+                    tabIndex="-1"
                   >
                     Peliculas
                   </button>
                 </li>
-                <li class="tabs_tab-list-item" role="presentation">
+                <li className="tabs_tab-list-item" role="presentation">
                   <button
                     className={
                       activeTab === "2"
@@ -61,12 +61,12 @@ const ABMs = () => {
                     aria-controls="i1-Section2"
                     aria-selected="false"
                     role="tab"
-                    tabindex="-1"
+                    tabIndex="-1"
                   >
                     Funciones
                   </button>
                 </li>
-                <li class="tabs_tab-list-item" role="presentation">
+                <li className="tabs_tab-list-item" role="presentation">
                   <button
                     className={
                       activeTab === "3"
@@ -79,12 +79,12 @@ const ABMs = () => {
                     aria-controls="i2-Section3"
                     aria-selected="true"
                     role="tab"
-                    tabindex="0"
+                    tabIndex="0"
                   >
                     Salas
                   </button>
                 </li>
-                <li class="tabs_tab-list-item" role="presentation">
+                <li className="tabs_tab-list-item" role="presentation">
                   <button
                     className={
                       activeTab === "4"
@@ -97,13 +97,13 @@ const ABMs = () => {
                     aria-controls="i0-Section1"
                     aria-selected="false"
                     role="tab"
-                    tabindex="-1"
+                    tabIndex="-1"
                   >
                     Butacas
                   </button>
                 </li>
               </ul>
-              <div class="tabs_panels">
+              <div className="tabs_panels">
                 <section
                   className={
                     activeTab === "1"
@@ -111,7 +111,7 @@ const ABMs = () => {
                       : styles.tabsPanelHidden
                   }
                   role="tabpanel"
-                  tabindex="-1"
+                  tabIndex="-1"
                 >
                   <div className="">
                     <TableFilm />
@@ -124,7 +124,7 @@ const ABMs = () => {
                       : styles.tabsPanelHidden
                   }
                   role="tabpanel"
-                  tabindex="-1"
+                  tabIndex="-1"
                 >
                   <div>
                     <TableShow />
@@ -137,7 +137,7 @@ const ABMs = () => {
                       : styles.tabsPanelHidden
                   }
                   id="i2-Section3"
-                  tabindex="-1"
+                  tabIndex="-1"
                 >
                   <div>
                     <TableSala />
@@ -150,7 +150,7 @@ const ABMs = () => {
                       : styles.tabsPanelHidden
                   }
                   id="i2-Section4"
-                  tabindex="-1"
+                  tabIndex="-1"
                 >
                   <div>
                     <TableButaca />

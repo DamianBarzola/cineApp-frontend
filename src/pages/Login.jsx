@@ -18,7 +18,7 @@ const Login = () => {
             </div>
 
             <input
-              class="form-control  mt-5"
+              className="form-control  mt-5"
               type="text"
               placeholder="Usuario"
               name="nombre"
@@ -28,7 +28,7 @@ const Login = () => {
               required
             />
             <input
-              class="form-control mt-4"
+              className="form-control mt-4"
               type="password"
               placeholder="Contraseña"
               name="email"

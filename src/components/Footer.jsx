@@ -8,54 +8,54 @@ import { FiMail } from "react-icons/fi";
 const Footer = () => {
   return (
     <>
-      <div class={style.footer}>
-        <div class={style.container}>
-          <div class={style.rowFooter}>
-            <div class={style.footerCol}>
-              <h4 class={style.title}>Sobre Nosotros</h4>
-              <p class={style.about}>
+      <div className={style.footer}>
+        <div className={style.container}>
+          <div className={style.rowFooter}>
+            <div className={style.footerCol}>
+              <h4 className={style.title}>Sobre Nosotros</h4>
+              <p className={style.about}>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Exercitationem, cumque recusandae. Consectetur quia aliquid
                 similique iure unde sint, dolores deleniti voluptas ad est
                 temporibus, reiciendis nobis animi atque ipsam nostrum!
               </p>
             </div>
-            <div class={style.footerCol + " ms-md-5"}>
-              <h4 class={style.title}>Mapa del Sitio</h4>
+            <div className={style.footerCol + " ms-md-5"}>
+              <h4 className={style.title}>Mapa del Sitio</h4>
               <ul>
                 <li>
-                  <Link class={style.link} to="/">
+                  <Link className={style.link} to="/tickets">
                     Boleteria Online
                   </Link>
                 </li>
                 <li>
-                  <Link class={style.link} to="/movies">
+                  <Link className={style.link} to="/movies">
                     Cartelera
                   </Link>
                 </li>
                 <li>
-                  <Link class={style.link} to="/comingsoon">
+                  <Link className={style.link} to="/comingsoon">
                     Próximamente
                   </Link>
                 </li>
                 <li>
-                  <Link class={style.link} to="/contact">
+                  <Link className={style.link} to="/contact">
                     Contacto
                   </Link>
                 </li>
 
                 <li>
-                  <Link class={style.link} to="/abm">
+                  <Link className={style.link} to="/abm">
                     Administrador
                   </Link>
                 </li>
               </ul>
             </div>
-            <div class={style.footerCol + " ps-md-5"}>
-              <h4 class={style.title}>Contáctanos</h4>
-              <div class="social-links">
+            <div className={style.footerCol + " ps-md-5"}>
+              <h4 className={style.title}>Contáctanos</h4>
+              <div className="social-links">
                 <a
-                  class={style.linkSocial}
+                  className={style.linkSocial}
                   rel="noreferrer"
                   target="_blank"
                   href="https://www.facebook.com/"
@@ -63,14 +63,14 @@ const Footer = () => {
                   <FaFacebook />
                 </a>
                 <a
-                  class={style.linkSocial}
+                  className={style.linkSocial}
                   rel="noreferrer"
                   target="_blank"
                   href="https://www.instagram.com/?hl=es-la"
                 >
                   <FaInstagram />
                 </a>
-                <Link class={style.linkSocial} to="/contact">
+                <Link className={style.linkSocial} to="/contact">
                   <FiMail />
                 </Link>
               </div>

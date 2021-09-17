@@ -5,7 +5,7 @@ const FormAddButaca = () => {
     <div>
       <button
         type="button"
-        class="btn btn-success  mb-2"
+        className="btn btn-success  mb-2"
         data-bs-toggle="modal"
         data-bs-target="#addButaca"
       >
@@ -14,7 +14,7 @@ const FormAddButaca = () => {
           width="24"
           height="24"
           fill="currentColor"
-          class="bi bi-plus-circle-fill"
+          className="bi bi-plus-circle-fill"
           viewBox="0 0 20 18"
         >
           <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"></path>
@@ -22,37 +22,37 @@ const FormAddButaca = () => {
         Agregar
       </button>
 
-      <div class="modal fade" id="addButaca" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title text-dark" id="exampleModalLabel">
+      <div className="modal fade" id="addButaca" aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title text-dark" id="exampleModalLabel">
                 Agregar Butaca
               </h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <form>
-                <div class="mb-3">
+                <div className="mb-3">
                   <p>
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       id="recipient-name"
                       placeholder="Sala(capaz tenga que ser un combobox)"
                     />
                   </p>
                 </div>
-                <div class="mb-3">
+                <div className="mb-3">
                   <p>
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       id="recipient-name"
                       placeholder="Estado(capaz tenga que ser un combobox)"
                     />
@@ -60,15 +60,15 @@ const FormAddButaca = () => {
                 </div>
               </form>
             </div>
-            <div class="modal-footer d-flex text-center">
+            <div className="modal-footer d-flex text-center">
               <button
                 type="button"
-                class="btn btn-secondary"
+                className="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
                 Cerrar
               </button>
-              <button type="button" class="btn btn-primary">
+              <button type="button" className="btn btn-primary">
                 Guardar
               </button>
             </div>
