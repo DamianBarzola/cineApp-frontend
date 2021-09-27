@@ -1,14 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { creteFilm } from "../../actions/film";
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
 
 const FormAddFilm = () => {
+  const dispatch = useDispatch();
+
+  const [data, setData] = useState({
+    name: "",
+    description: "",
+    duration: "",
+    poster: "",
+  });
+
+  const { name, description, duration, poster } = data;
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setData({
+      ...data,
+      [e.target.name]: value,
+    });
+  };
+
+  const handleAdd = (e) => {
+    e.preventDefault();
+    if (
+      name.trim() === "" ||
+      description.trim() === "" || //ver para validar duracion
+      poster.trim() === ""
+    ) {
+      //falta validar formato
+      return alert("Complete los campos"); //ver para cambiar
+    } else if (
+      /[^A-Za-z\d\s.,:]/.test(name) || //falta permitir acentos y ñ
+      /[^A-Za-z\d\s.,:]/.test(description) ||
+      /[^A-Za-z\d\s./]/.test(poster)
+    ) {
+      return alert("Formato no valido"); //ver para cambiar
+    } else {
+      dispatch(creteFilm(data));
+      toggle();
+      setData({
+        name: "",
+        description: "",
+        duration: "",
+        poster: "",
+      });
+    }
+  };
+
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
   return (
-    <div>
-      <button
-        type="button"
-        className="btn btn-success  mb-2"
-        data-bs-toggle="modal"
-        data-bs-target="#addfilm"
-      >
+    <div className="modalcss">
+      <button type="button" className="btn btn-success  mb-2" onClick={toggle}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -22,59 +69,82 @@ const FormAddFilm = () => {
         Agregar
       </button>
 
-      <div className="modal fade" id="addfilm" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title text-dark" id="exampleModalLabel">
-                Agregar Película
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+      <Modal isOpen={modal} toggle={toggle} className="modalcss">
+        <ModalHeader className="text-dark" toggle={toggle}>
+          Modal title
+        </ModalHeader>
+        <ModalBody className="text-dark">
+          <form>
+            <div className="mb-3">
+              <p>
+                <input
+                  onChange={handleChange}
+                  value={name}
+                  type="text"
+                  className="form-control"
+                  name="name"
+                  placeholder="Título"
+                  maxLength="75"
+                />
+              </p>
             </div>
-            <div className="modal-body">
-              <form>
-                <div className="mb-3">
-                  <p>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="recipient-name"
-                      placeholder="Título"
-                    />
-                  </p>
-                </div>
-                <div className="mb-3">
-                  <p>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="recipient-name"
-                      placeholder="Descripción"
-                    />
-                  </p>
-                </div>
-              </form>
+            <div className="mb-3">
+              <p>
+                <input
+                  value={description}
+                  onChange={handleChange}
+                  type="text"
+                  className="form-control"
+                  name="description"
+                  placeholder="Descripción"
+                  maxLength="300"
+                />
+              </p>
+            </div>
+            <div className="mb-3">
+              <p>
+                <input
+                  value={duration}
+                  onChange={handleChange}
+                  type="number"
+                  className="form-control"
+                  name="duration"
+                  placeholder="Duración (Min)"
+                />
+              </p>
+            </div>
+            <div className="mb-3">
+              <p>
+                <input
+                  value={poster}
+                  onChange={handleChange}
+                  type="text"
+                  className="form-control"
+                  name="poster"
+                  placeholder="Link Poster"
+                  maxLength="50"
+                />
+              </p>
             </div>
             <div className="modal-footer d-flex text-center">
               <button
                 type="button"
                 className="btn btn-secondary"
-                data-bs-dismiss="modal"
+                onClick={toggle}
               >
                 Cerrar
               </button>
-              <button type="button" className="btn btn-primary">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={handleAdd}
+              >
                 Guardar
               </button>
             </div>
-          </div>
-        </div>
-      </div>
+          </form>
+        </ModalBody>
+      </Modal>
     </div>
   );
 };

@@ -1,18 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
+import { deleteFilm, updateFilm } from "../../actions/film.js";
 
 const ElementFilm = ({ data }) => {
-  const { id, name, description } = data;
+  const { id, name, description, duration, poster } = data;
+
+  const dispatch = useDispatch();
+  const [modalModify, setModalModify] = useState(false);
+
+  const toggleModify = () => setModalModify(!modalModify);
+
+  const [modalDelete, setModalDelete] = useState(false);
+
+  const toggleDelete = () => setModalDelete(!modalDelete);
+
+  const handleDelete = () => {
+    dispatch(deleteFilm(id));
+  };
+
+  const [newData, setNewData] = useState({
+    id: id,
+    name: name,
+    description: description,
+    duration: duration,
+    poster: poster,
+  });
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setNewData({
+      ...data,
+      [e.target.name]: value,
+    });
+  };
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    if (
+      name.trim() === "" ||
+      description.trim() === "" || //ver para validar duracion
+      poster.trim() === ""
+    ) {
+      //falta validar formato
+      return alert("Complete los campos"); //ver para cambiar
+    } else if (
+      /[^A-Za-z\d\s.]/.test(name) ||
+      /[^A-Za-z\d\s.]/.test(description) ||
+      /[^A-Za-z\d\s./]/.test(poster)
+    ) {
+      return alert("Formato no valido"); //ver para cambiar
+    } else {
+      dispatch(updateFilm(newData));
+      toggleModify();
+    }
+  };
 
   return (
     <>
       <td>{id}</td>
       <td>{name}</td>
       <td>{description}</td>
-      <td className="d-flex justify-content-center">
+      <td>{duration + " min"}</td>
+      <td>{poster}</td>
+      <td className="d-flex justify-content-center text-align-center">
         <button
           className="btn btn-danger me-3"
-          data-bs-toggle="modal"
-          data-bs-target="#deletemodalFilm"
+          onClick={toggleDelete}
+          type="button"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -27,8 +82,8 @@ const ElementFilm = ({ data }) => {
         </button>
         <button
           className="btn btn-warning"
-          data-bs-toggle="modal"
-          data-bs-target="#modifyfilm"
+          onClick={toggleModify}
+          type="button"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -43,106 +98,109 @@ const ElementFilm = ({ data }) => {
         </button>
       </td>
 
-      <div className="modal fade text-dark" id="modifyfilm" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Película - Modificar Datos
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+      <Modal isOpen={modalModify} toggle={toggleModify} className="modalcss">
+        <ModalHeader className="text-dark" toggle={toggleModify}>
+          Película - Modificar Datos
+        </ModalHeader>
+        <ModalBody className="text-dark">
+          <form onSubmit={handleUpdate}>
+            <div className="mb-3">
+              <p>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="recipient-name"
+                  placeholder="Id"
+                  value={id}
+                  disabled
+                />
+              </p>
             </div>
-            <div className="modal-body">
-              <form>
-                <div className="mb-3">
-                  <p>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="recipient-name"
-                      placeholder="Id"
-                      disabled
-                    />
-                  </p>
-                </div>
-                <div className="mb-3">
-                  <p>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="recipient-name"
-                      placeholder="Título"
-                    />
-                  </p>
-                </div>
-                <div className="mb-3">
-                  <p>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="recipient-name"
-                      placeholder="Descripción"
-                    />
-                  </p>
-                </div>
-              </form>
+            <div className="mb-3">
+              <p>
+                <input
+                  onChange={handleChange}
+                  value={newData.name}
+                  name="name"
+                  type="text"
+                  className="form-control"
+                  placeholder="Título"
+                />
+              </p>
+            </div>
+            <div className="mb-3">
+              <p>
+                <input
+                  onChange={handleChange}
+                  value={newData.description}
+                  name="description"
+                  type="text"
+                  className="form-control"
+                  placeholder="Descripción"
+                />
+              </p>
+            </div>
+            <div className="mb-3">
+              <p>
+                <input
+                  onChange={handleChange}
+                  value={newData.duration}
+                  name="duration"
+                  type="number"
+                  className="form-control"
+                  placeholder="Duración (Min)"
+                />
+              </p>
+            </div>
+            <div className="mb-3">
+              <p>
+                <input
+                  onChange={handleChange}
+                  value={newData.poster}
+                  name="poster"
+                  type="text"
+                  className="form-control"
+                  placeholder="Link Poster"
+                />
+              </p>
             </div>
             <div className="modal-footer d-flex text-center">
               <button
                 type="button"
                 className="btn btn-secondary"
-                data-bs-dismiss="modal"
+                onClick={toggleModify}
               >
                 Cerrar
               </button>
-              <button type="button" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary">
                 Guardar
               </button>
             </div>
-          </div>
-        </div>
-      </div>
+          </form>
+        </ModalBody>
+      </Modal>
 
-      <div
-        className="modal fade text-dark"
-        id="deletemodalFilm"
-        tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Estas seguro que quieres eliminar esta pelicula?
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Cancelar
-              </button>
-              <button type="button" className="btn btn-primary">
-                Aceptar
-              </button>
-            </div>
-          </div>
+      <Modal isOpen={modalDelete} toggle={toggleDelete} className="modalcss">
+        <ModalHeader className="text-dark" toggle={toggleDelete}>
+          Estas seguro que quieres eliminar esta pelicula?
+        </ModalHeader>
+        <div className="modal-footer">
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={toggleDelete}
+          >
+            Cancelar
+          </button>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={handleDelete}
+          >
+            Aceptar
+          </button>
         </div>
-      </div>
+      </Modal>
     </>
   );
 };

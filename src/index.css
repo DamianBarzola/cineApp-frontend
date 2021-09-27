@@ -9,7 +9,33 @@ body {
   /* background-color: #24262b; */
   background-color: #191a1d;
   color: white;
+  padding-right: 0!important;
 }
+
+
+body::-webkit-scrollbar {
+  padding-top: 10px;
+  width: 10px;     
+  height: 8px; 
+     
+}
+body::-webkit-scrollbar-thumb {
+  background: #aaaaaa;
+  border-radius: 15px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  
+  background-color: #797878;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+body::-webkit-scrollbar-thumb:active {
+  background-color: #797878;
+}
+
+
+/* Cambiamos el fondo cuando esté en active o hover */
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -18,3 +44,4 @@ code {
 a{
   text-decoration: none;
 }
+table{border: hidden;}

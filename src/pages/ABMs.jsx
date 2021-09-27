@@ -5,12 +5,27 @@ import styles from "../styles/ABMs.module.css";
 import TableShow from "../components/ABMs/TableShow";
 import TableSala from "../components/ABMs/TableSala";
 import TableButaca from "../components/ABMs/TableButaca";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../actions/auth";
+import { clearFilmData } from "../actions/film";
 
 const ABMs = () => {
+  const { auth } = useSelector((state) => state);
+
+  const dispatch = useDispatch();
+
   const [activeTab, setActiveTab] = useState("1");
   const toggle = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
   };
+
+  const handleLogOut = () => {
+    dispatch(clearFilmData());
+    dispatch(logout());
+    window.location.reload(); //ver para cambiar
+    JSON.parse(localStorage.removeItem("user"));
+  };
+
   return (
     <div className="container">
       <div className="row d-flex justify-content-center text-center p-4 ">
@@ -18,11 +33,25 @@ const ABMs = () => {
           className={styles.containerCard + " container col-md-12 p-4 bg-dark"}
         >
           <div className="d-flex justify-content-around row">
-            <div className="col-4 text-start">
-              <h1>Panel ABM</h1>
+            <div className="col-5 text-start d-flex text-align-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+              </svg>
+              <h3 className={styles.font}> {auth.fullname}</h3>
             </div>
-            <div className="col-4 text-end">
-              <button className="btn btn-danger `">Cerrar Sesion</button>
+            <div className="col-5 text-end">
+              <button
+                className={styles.close + " btn btn-danger"}
+                onClick={handleLogOut}
+              >
+                Cerrar Sesion
+              </button>
             </div>
           </div>
           <hr />
@@ -126,9 +155,7 @@ const ABMs = () => {
                   role="tabpanel"
                   tabIndex="-1"
                 >
-                  <div>
-                    <TableShow />
-                  </div>
+                  <div>{/* <TableShow /> */}</div>
                 </section>
                 <section
                   className={
@@ -139,9 +166,7 @@ const ABMs = () => {
                   id="i2-Section3"
                   tabIndex="-1"
                 >
-                  <div>
-                    <TableSala />
-                  </div>
+                  <div>{/* <TableSala /> */}</div>
                 </section>
                 <section
                   className={
@@ -152,9 +177,7 @@ const ABMs = () => {
                   id="i2-Section4"
                   tabIndex="-1"
                 >
-                  <div>
-                    <TableButaca />
-                  </div>
+                  <div>{/* <TableButaca /> */}</div>
                 </section>
               </div>
             </div>

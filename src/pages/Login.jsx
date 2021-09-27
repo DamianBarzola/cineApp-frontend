@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { emailAndPasslogin } from "../actions/auth";
 import style from "../styles/Login.module.css";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const [data, setData] = useState({ email: "", password: "" });
+  const { email, password } = data;
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setData({
+      ...data,
+      [e.target.name]: value,
+    });
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    await dispatch(emailAndPasslogin(email, password));
+    //ver para cambiar
+  };
   return (
     <div className="container">
       <div className="row d-flex justify-content-center text-center my-5 ">
@@ -10,30 +28,30 @@ const Login = () => {
             style.containerCard + " container col-md-6 col-lg-4  bg-dark"
           }
         >
-          <form className={style.form + " p-4"} action="">
+          <form className={style.form + " p-4"} onSubmit={handleLogin}>
             <div className={style.title}>
-              <p>
-                <h2> Inicio de Sesión</h2>
-              </p>
+              <h2> Inicio de Sesión</h2>
             </div>
 
             <input
+              onChange={handleChange}
+              value={email}
               className="form-control  mt-5"
-              type="text"
-              placeholder="Usuario"
-              name="nombre"
-              minlength="1"
-              maxlength="40"
-              pattern="[A-Za-z0-9_-]{1,20}"
+              type="email"
+              placeholder="Correo Electrónico"
+              name="email"
+              maxLength="40"
               required
             />
             <input
+              onChange={handleChange}
+              value={password}
               className="form-control mt-4"
               type="password"
               placeholder="Contraseña"
-              name="email"
-              minlength="4"
-              maxlength="40"
+              name="password"
+              minLength="1"
+              maxLength="40"
               required
             />
             <button className={style.btnLog + " mt-5"} type="submit">

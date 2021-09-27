@@ -6,9 +6,11 @@
       display: flex;
     flex-direction: column;
 }
+
 table{
   background: rgb(60, 60, 61);
   border-radius: 10px;
+  border: none;
     
 }
 .tabsList{
@@ -60,4 +62,16 @@ table{
   border-radius: 5px;
   padding: 20px;
   display: none;
+}
+
+@media(max-width: 530px){
+  .font{
+    font-size: 17px;
+    transform: translateY(-10%);
+}
+.close{
+  font-size: 15px;
+  padding:8px 2px;
+
+}
 }

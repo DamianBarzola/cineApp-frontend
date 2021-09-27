@@ -1,27 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { loadFilms, readFilms } from "../../actions/film";
 import Spinner from "../Spinner";
 import ElementFilm from "./ElementFilm";
 import FormAddFilm from "./FormAddFilm";
-// const data = [
-//   { id: 1, name: "Carreritas", description: "Solo Gana Uno" },
-//   { id: 2, name: "Muerte 2", description: "La mejor" },
-//   { id: 3, name: "Terror 16", description: "Miedo miedo" },
-//   { id: 4, name: "Comediaa ", description: "ajsjdjsa" },
-// ];
+
 const TableFilm = () => {
-  const [movies, setmovies] = useState([]);
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
+  const movies = useSelector((state) => state.film.data);
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("/pelicula/all")
-      .then((result) => result.json())
-      .then((data) => {
-        setmovies(data);
-
-        setIsLoading(false);
-      });
-  }, []);
+    loadFilms().then((filmData) => {
+      dispatch(readFilms(filmData));
+      setIsLoading(false);
+    });
+  }, [dispatch]);
 
   if (isLoading) {
     return <Spinner />;
@@ -40,6 +36,8 @@ const TableFilm = () => {
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Descripcion</th>
+                <th>Duración</th>
+                <th>Poster</th>
                 <th white-space="nowrap" width="1%">
                   Accion
                 </th>
