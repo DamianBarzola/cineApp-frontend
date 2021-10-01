@@ -21,13 +21,7 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    try {
-      dispatch(emailAndPasslogin(email, password));
-    } catch (e) {
-      console.log("object");
-    }
-
-    //ver para cambiar
+    dispatch(emailAndPasslogin(email, password));
   };
 
   return (
