@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { emailAndPasslogin } from "../actions/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { emailAndPasslogin, errorMsg } from "../actions/auth";
 import style from "../styles/Login.module.css";
 
 const Login = () => {
+  const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
+
   const [data, setData] = useState({ email: "", password: "" });
+
   const { email, password } = data;
+
   const handleChange = (e) => {
     const value = e.target.value;
     setData({
@@ -25,6 +29,7 @@ const Login = () => {
 
     //ver para cambiar
   };
+
   return (
     <div className="container">
       <div className="row d-flex justify-content-center text-center my-5 ">
@@ -59,9 +64,10 @@ const Login = () => {
               maxLength="40"
               required
             />
-            <button className={style.btnLog + " mt-5"} type="submit">
+            <button className={style.btnLog} type="submit">
               Ingresar
             </button>
+            {auth.msg && <p className="pt-3 text-danger">{auth.msg}</p>}
           </form>
         </div>
       </div>

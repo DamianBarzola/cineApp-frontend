@@ -22,8 +22,8 @@ const ABMs = () => {
   const handleLogOut = () => {
     dispatch(logout());
     dispatch(clearFilmData());
-    JSON.parse(localStorage.removeItem("user"));
     window.location.reload(); //ver para cambiar
+    JSON.parse(localStorage.removeItem("user"));
   };
 
   return (
