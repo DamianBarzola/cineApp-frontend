@@ -45,8 +45,8 @@ const ElementFilm = ({ data }) => {
       //falta validar formato
       return alert("Complete los campos"); //ver para cambiar
     } else if (
-      /[^A-Za-z\d\s.]/.test(name) ||
-      /[^A-Za-z\d\s.]/.test(description) ||
+      /[^A-Za-z\d\s.,;:\u00E0-\u00FC]/.test(name) || //falta permitir acentos y ñ
+      /[^A-Za-z\d\s.,;:\u00E0-\u00FC]/.test(description) ||
       /[^A-Za-z\d\s./]/.test(poster)
     ) {
       return alert("Formato no valido"); //ver para cambiar
@@ -63,7 +63,7 @@ const ElementFilm = ({ data }) => {
       <td>{description}</td>
       <td>{duration + " min"}</td>
       <td>{poster}</td>
-      <td className="d-flex justify-content-center text-align-center">
+      <td>
         <button
           className="btn btn-danger me-3"
           onClick={toggleDelete}
@@ -80,6 +80,9 @@ const ElementFilm = ({ data }) => {
             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
           </svg>
         </button>
+      </td>
+      <td className="m-">
+        {" "}
         <button
           className="btn btn-warning"
           onClick={toggleModify}

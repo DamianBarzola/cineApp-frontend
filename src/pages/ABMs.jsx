@@ -20,10 +20,10 @@ const ABMs = () => {
   };
 
   const handleLogOut = () => {
-    dispatch(clearFilmData());
     dispatch(logout());
-    window.location.reload(); //ver para cambiar
+    dispatch(clearFilmData());
     JSON.parse(localStorage.removeItem("user"));
+    window.location.reload(); //ver para cambiar
   };
 
   return (

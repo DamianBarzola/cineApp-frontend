@@ -15,9 +15,14 @@ const Login = () => {
     });
   };
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    await dispatch(emailAndPasslogin(email, password));
+    try {
+      dispatch(emailAndPasslogin(email, password));
+    } catch (e) {
+      console.log("object");
+    }
+
     //ver para cambiar
   };
   return (

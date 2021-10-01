@@ -12,7 +12,7 @@ import ABMs from "../pages/ABMs";
 import Tickets from "../pages/Tickets";
 import Login from "../pages/Login";
 import { useDispatch } from "react-redux";
-import { login } from "../actions/auth";
+import { login, logout } from "../actions/auth";
 import PublicRouter from "./PublicRouter";
 import PrivateRouter from "./PrivateRouter";
 
@@ -25,6 +25,7 @@ const AppRouter = () => {
       dispatch(login(user.fullname, user.email));
       setlog(true);
     } else {
+      dispatch(logout());
       setlog(false);
     }
   }, [dispatch, log]);

@@ -25,7 +25,7 @@ const TableFilm = () => {
 
   return (
     <div>
-      <div className="container col-md-9  ">
+      <div className="container col-md-11 ">
         <div className="d-flex justify-content-end pr-2">
           <FormAddFilm />
         </div>
@@ -38,7 +38,7 @@ const TableFilm = () => {
                 <th>Descripcion</th>
                 <th>Duración</th>
                 <th>Poster</th>
-                <th white-space="nowrap" width="1%">
+                <th white-space="nowrap" width="1%" colSpan="2">
                   Accion
                 </th>
               </tr>
