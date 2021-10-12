@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
 
 const FormAddShow = () => {
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
+
   return (
-    <div>
-      <button
-        type="button"
-        className="btn btn-success  mb-2"
-        data-bs-toggle="modal"
-        data-bs-target="#addSala"
-      >
+    <div className="modalcss">
+      <button type="button" className="btn btn-success  mb-2" onClick={toggle}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -22,79 +22,48 @@ const FormAddShow = () => {
         Agregar
       </button>
 
-      <div className="modal fade" id="addSala" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title text-dark" id="exampleModalLabel">
-                Agregar Sala
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+      <Modal isOpen={modal} toggle={toggle} className="modalcss">
+        <ModalHeader className="text-dark" toggle={toggle}>
+          Agregar Sala
+        </ModalHeader>
+        <ModalBody className="text-dark">
+          <form>
+            <div className="mb-3">
+              <p>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="recipient-name"
+                  placeholder="Nombre"
+                />
+              </p>
             </div>
-            <div className="modal-body">
-              <form>
-                <div className="mb-3">
-                  <p>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="recipient-name"
-                      placeholder="Nombre"
-                    />
-                  </p>
-                </div>
-                <div className="mb-3">
-                  <p>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="recipient-name"
-                      placeholder="Estado(capaz tenga que ser un combobox)"
-                    />
-                  </p>
-                </div>
-                <div className="mb-3">
-                  <p>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="recipient-name"
-                      placeholder="Funcion(capaz tenga que ser un combobox)"
-                    />
-                  </p>
-                </div>
-                <div className="mb-3">
-                  <p>
-                    <input
-                      type="number"
-                      className="form-control"
-                      id="recipient-name"
-                      placeholder="Butacas"
-                    />
-                  </p>
-                </div>
-              </form>
+            <div className="mb-3">
+              <p>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="recipient-name"
+                  placeholder="Estado(combobox)"
+                />
+              </p>
             </div>
+
             <div className="modal-footer d-flex text-center">
               <button
                 type="button"
                 className="btn btn-secondary"
-                data-bs-dismiss="modal"
+                onClick={toggle}
               >
                 Cerrar
               </button>
-              <button type="button" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary">
                 Guardar
               </button>
             </div>
-          </div>
-        </div>
-      </div>
+          </form>
+        </ModalBody>
+      </Modal>
     </div>
   );
 };

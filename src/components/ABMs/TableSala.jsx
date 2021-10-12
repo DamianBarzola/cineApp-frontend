@@ -1,41 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Spinner } from "reactstrap";
+import { loadSalas, readSalas } from "../../actions/sala";
 import ElementSala from "./ElementSala";
 import FormAddSala from "./FormAddSala";
 
-const data = [
-  {
-    id: 1,
-    name: "Principal",
-    state: "Habilitada",
-    show: "1",
-    butacas: "20",
-  },
-  {
-    id: 2,
-    name: "Secundaria",
-    state: "Habilitada",
-    show: "2",
-    butacas: "20",
-  },
-  {
-    id: 3,
-    name: "Entrada",
-    state: "Habilitada",
-    show: "3,4",
-    butacas: "10",
-  },
-  {
-    id: 4,
-    name: "Trasera",
-    state: "Mantenimiento",
-    show: "Ninguna",
-    butacas: "10",
-  },
-];
 const TableSala = () => {
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
+  const salas = useSelector((state) => state.sala.data);
+
+  useEffect(() => {
+    setIsLoading(true);
+    loadSalas().then((salaData) => {
+      console.log(salaData);
+      dispatch(readSalas(salaData));
+      setIsLoading(false);
+    });
+  }, [dispatch]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <div>
-      <div className="container col-md-9  ">
+      <div className="container col-md-11  ">
         <div className="d-flex justify-content-end pr-2">
           <FormAddSala />
         </div>
@@ -46,19 +35,17 @@ const TableSala = () => {
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Estado</th>
-                <th>Funciones</th>
-                <th>Butacas</th>
-                <th white-space="nowrap" width="1%">
+                <th white-space="nowrap" width="1%" colSpan="2">
                   Accion
                 </th>
               </tr>
             </thead>
 
             <tbody>
-              {data.map((elemento) => {
+              {salas.map((elementoSala) => {
                 return (
-                  <tr key={elemento.id}>
-                    <ElementSala data={elemento} />
+                  <tr key={elementoSala.id}>
+                    <ElementSala data={elementoSala} />
                   </tr>
                 );
               })}

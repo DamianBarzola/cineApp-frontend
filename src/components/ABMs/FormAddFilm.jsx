@@ -71,7 +71,7 @@ const FormAddFilm = () => {
 
       <Modal isOpen={modal} toggle={toggle} className="modalcss">
         <ModalHeader className="text-dark" toggle={toggle}>
-          Modal title
+          Agregar Pelicula
         </ModalHeader>
         <ModalBody className="text-dark">
           <form>

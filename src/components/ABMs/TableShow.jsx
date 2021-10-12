@@ -1,17 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Spinner } from "reactstrap";
+import { loadShows, readShows } from "../../actions/show";
 import ElementShow from "./ElementShow";
 import FormAddShow from "./FormAddShow";
 
-const data = [
-  { id: 1, film: "Carreritas", sala: "1" },
-  { id: 2, film: "Muerte 2", sala: "2" },
-  { id: 3, film: "Terror 16", sala: "3" },
-  { id: 4, film: "Comediaa ", sala: "4" },
-];
 const TableShow = () => {
+  const dispatch = useDispatch();
+  const [isLoadingg, setIsLoading] = useState(true);
+  const shows = useSelector((state) => state.show.data);
+
+  useEffect(() => {
+    setIsLoading(true);
+    loadShows().then((showData) => {
+      console.log(showData);
+      dispatch(readShows(showData));
+      setIsLoading(false);
+    });
+  }, [dispatch]);
+
+  if (isLoadingg) {
+    return <Spinner />;
+  }
   return (
     <div>
-      <div className="container col-md-9  ">
+      <div className="container col-md-11  ">
         <div className="d-flex justify-content-end pr-2">
           <FormAddShow />
         </div>
@@ -22,17 +35,19 @@ const TableShow = () => {
                 <th>Id</th>
                 <th>Pelicula</th>
                 <th>Sala</th>
-                <th white-space="nowrap" width="1%">
+                <th>Fecha</th>
+                <th>Horario</th>
+                <th white-space="nowrap" width="1%" colSpan="2">
                   Accion
                 </th>
               </tr>
             </thead>
 
             <tbody>
-              {data.map((elemento) => {
+              {shows.map((elementoShow) => {
                 return (
-                  <tr key={elemento.id}>
-                    <ElementShow data={elemento} />
+                  <tr key={elementoShow.id}>
+                    <ElementShow data={elementoShow} />
                   </tr>
                 );
               })}

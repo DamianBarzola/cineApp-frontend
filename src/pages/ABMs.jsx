@@ -8,6 +8,7 @@ import TableButaca from "../components/ABMs/TableButaca";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/auth";
 import { clearFilmData } from "../actions/film";
+import { clearShowData } from "../actions/show";
 
 const ABMs = () => {
   const { auth } = useSelector((state) => state);
@@ -22,6 +23,7 @@ const ABMs = () => {
   const handleLogOut = () => {
     dispatch(logout());
     dispatch(clearFilmData());
+    dispatch(clearShowData());
     window.location.reload(); //ver para cambiar
     JSON.parse(localStorage.removeItem("user"));
   };
@@ -155,7 +157,9 @@ const ABMs = () => {
                   role="tabpanel"
                   tabIndex="-1"
                 >
-                  <div>{/* <TableShow /> */}</div>
+                  <div>
+                    <TableShow />
+                  </div>
                 </section>
                 <section
                   className={
@@ -166,7 +170,9 @@ const ABMs = () => {
                   id="i2-Section3"
                   tabIndex="-1"
                 >
-                  <div>{/* <TableSala /> */}</div>
+                  <div>
+                    <TableSala />
+                  </div>
                 </section>
                 <section
                   className={

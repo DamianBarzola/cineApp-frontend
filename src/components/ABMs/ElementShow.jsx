@@ -1,18 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
 
 const ElementShow = ({ data }) => {
-  const { id, film, sala } = data;
+  const { id, pelicula, sala } = data;
+  const dispatch = useDispatch();
+  const [modalModify, setModalModify] = useState(false);
+
+  const toggleModify = () => setModalModify(!modalModify);
+
+  const [modalDelete, setModalDelete] = useState(false);
+
+  const toggleDelete = () => setModalDelete(!modalDelete);
 
   return (
     <>
       <td>{id}</td>
-      <td>{film}</td>
-      <td>{sala}</td>
-      <td className="d-flex justify-content-center">
+      <td>{pelicula.name}</td>
+      <td>{sala.name}</td>
+      <td>Falta</td>
+      <td>Falta</td>
+      <td>
         <button
           className="btn btn-danger me-3"
-          data-bs-toggle="modal"
-          data-bs-target="#deletemodalShow"
+          onClick={toggleDelete}
+          type="button"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -25,10 +37,13 @@ const ElementShow = ({ data }) => {
             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
           </svg>
         </button>
+      </td>
+      <td className="m-">
+        {" "}
         <button
           className="btn btn-warning"
-          data-bs-toggle="modal"
-          data-bs-target="#modifyShow"
+          onClick={toggleModify}
+          type="button"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -43,106 +58,100 @@ const ElementShow = ({ data }) => {
         </button>
       </td>
 
-      <div className="modal fade text-dark" id="modifyShow" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Función - Modificar Datos
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+      <Modal isOpen={modalModify} toggle={toggleModify} className="modalcss">
+        <ModalHeader className="text-dark" toggle={toggleModify}>
+          Funcion - Modificar Datos
+        </ModalHeader>
+        <ModalBody className="text-dark">
+          <form>
+            <div className="mb-3">
+              <p>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="recipient-name"
+                  placeholder="Id"
+                  disabled
+                />
+              </p>
             </div>
-            <div className="modal-body">
-              <form>
-                <div className="mb-3">
-                  <p>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="recipient-name"
-                      placeholder="Id"
-                      disabled
-                    />
-                  </p>
-                </div>
-                <div className="mb-3">
-                  <p>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="recipient-name"
-                      placeholder="Pelicula"
-                    />
-                  </p>
-                </div>
-                <div className="mb-3">
-                  <p>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="recipient-name"
-                      placeholder="Sala"
-                    />
-                  </p>
-                </div>
-              </form>
+            <div className="mb-3">
+              <p>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="recipient-name"
+                  placeholder="Pelicula"
+                />
+              </p>
+            </div>
+            <div className="mb-3">
+              <p>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="recipient-name"
+                  placeholder="Sala"
+                />
+              </p>
+            </div>
+            <div className="mb-3">
+              <p>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="recipient-name"
+                  placeholder="Fecha"
+                />
+              </p>
+            </div>
+            <div className="mb-3">
+              <p>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="recipient-name"
+                  placeholder="Horario"
+                />
+              </p>
             </div>
             <div className="modal-footer d-flex text-center">
               <button
                 type="button"
                 className="btn btn-secondary"
-                data-bs-dismiss="modal"
+                onClick={toggleModify}
               >
                 Cerrar
               </button>
-              <button type="button" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary">
                 Guardar
               </button>
             </div>
-          </div>
-        </div>
-      </div>
+          </form>
+        </ModalBody>
+      </Modal>
 
-      <div
-        className="modal fade text-dark"
-        id="deletemodalShow"
-        tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Estas seguro que quieres eliminar esta Función?
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Cancelar
-              </button>
-              <button type="button" className="btn btn-primary">
-                Borrar
-              </button>
-            </div>
-          </div>
+      <Modal isOpen={modalDelete} toggle={toggleDelete} className="modalcss">
+        <ModalHeader className="text-dark" toggle={toggleDelete}>
+          Estas seguro que quieres eliminar esta función?
+        </ModalHeader>
+        <div className="modal-footer">
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={toggleDelete}
+          >
+            Cancelar
+          </button>
+          <button
+            type="button"
+            className="btn btn-primary"
+            // onClick={handleDelete}
+          >
+            Aceptar
+          </button>
         </div>
-      </div>
+      </Modal>
     </>
   );
 };

@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
 
 const FormAddShow = () => {
+  const dispatch = useDispatch();
+
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
   return (
-    <div>
-      <button
-        type="button"
-        className="btn btn-success  mb-2"
-        data-bs-toggle="modal"
-        data-bs-target="#addShow"
-      >
+    <div className="modalcss">
+      <button type="button" className="btn btn-success  mb-2" onClick={toggle}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -22,59 +24,67 @@ const FormAddShow = () => {
         Agregar
       </button>
 
-      <div className="modal fade" id="addShow" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title text-dark" id="exampleModalLabel">
-                Agregar Función
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+      <Modal isOpen={modal} toggle={toggle} className="modalcss">
+        <ModalHeader className="text-dark" toggle={toggle}>
+          Agregar Función
+        </ModalHeader>
+        <ModalBody className="text-dark">
+          <form>
+            <div className="mb-3">
+              <p>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="recipient-name"
+                  placeholder="Pelicula (combobox)"
+                />
+              </p>
             </div>
-            <div className="modal-body">
-              <form>
-                <div className="mb-3">
-                  <p>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="recipient-name"
-                      placeholder="Pelicula(capaz tenga que ser un combobox)"
-                    />
-                  </p>
-                </div>
-                <div className="mb-3">
-                  <p>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="recipient-name"
-                      placeholder="Sala(capaz tenga que ser un combobox)"
-                    />
-                  </p>
-                </div>
-              </form>
+            <div className="mb-3">
+              <p>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="recipient-name"
+                  placeholder="Sala (combobox)"
+                />
+              </p>
+            </div>
+            <div className="mb-3">
+              <p>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="recipient-name"
+                  placeholder="Fecha (calendar?)"
+                />
+              </p>
+            </div>
+            <div className="mb-3">
+              <p>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="recipient-name"
+                  placeholder="Horario (checks o combobox)"
+                />
+              </p>
             </div>
             <div className="modal-footer d-flex text-center">
               <button
                 type="button"
                 className="btn btn-secondary"
-                data-bs-dismiss="modal"
+                onClick={toggle}
               >
                 Cerrar
               </button>
-              <button type="button" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary">
                 Guardar
               </button>
             </div>
-          </div>
-        </div>
-      </div>
+          </form>
+        </ModalBody>
+      </Modal>
     </div>
   );
 };

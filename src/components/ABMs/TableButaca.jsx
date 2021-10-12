@@ -27,7 +27,7 @@ const data = [
 const TableButaca = () => {
   return (
     <div>
-      <div className="container col-md-9  ">
+      <div className="container col-md-11  ">
         <div className="d-flex justify-content-end pr-2">
           <FormAddButaca />
         </div>

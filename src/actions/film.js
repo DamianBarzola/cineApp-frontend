@@ -6,10 +6,12 @@
 // }
 import { types } from "../types/types";
 
+const url = "http://localhost:8080";
+
 export const creteFilm = (data) => {
   return (dispatch, getstate) => {
     //const {auth} = getstate().auth; En caso de usar un token lo pediriamos aqui
-    fetch("http://localhost:8080/pelicula/add", {
+    fetch(url + "/pelicula/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -29,8 +31,8 @@ export const create = (data) => {
 };
 
 export const loadFilms = async () => {
-  const result = await fetch("http://localhost:8080/pelicula/all");
-  return await result.json();
+  const result = await fetch(url + "/pelicula/all");
+  return result.json();
 };
 
 export const readFilms = (data) => {
@@ -43,7 +45,7 @@ export const readFilms = (data) => {
 export const deleteFilm = (id) => {
   return (dispatch, getstate) => {
     //const {auth} = getstate().auth; En caso de usar un token lo pediriamos aqui
-    fetch("http://localhost:8080/pelicula/delete/" + id, {
+    fetch(url + "/pelicula/delete/" + id, {
       method: "Delete",
     })
       .then((res) => res.json())
@@ -63,7 +65,7 @@ export const deletef = (id) => {
 export const updateFilm = (data) => {
   return (dispatch, getstate) => {
     //const {auth} = getstate().auth; En caso de usar un token lo pediriamos aqui
-    fetch("http://localhost:8080/pelicula/update/" + data.id, {
+    fetch(url + "/pelicula/update/" + data.id, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
