@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/auth";
 import { clearFilmData } from "../actions/film";
 import { clearShowData } from "../actions/show";
+import { clearSalaData } from "../actions/sala";
 
 const ABMs = () => {
   const { auth } = useSelector((state) => state);
@@ -24,6 +25,7 @@ const ABMs = () => {
     dispatch(logout());
     dispatch(clearFilmData());
     dispatch(clearShowData());
+    dispatch(clearSalaData());
     window.location.reload(); //ver para cambiar
     JSON.parse(localStorage.removeItem("user"));
   };
