@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { loadFilms, readFilms } from "../../actions/film";
+import { loadFilmsAll, readFilms } from "../../actions/film";
 import Spinner from "../Spinner";
 import ElementFilm from "./ElementFilm";
 import FormAddFilm from "./FormAddFilm";
@@ -13,7 +13,7 @@ const TableFilm = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    loadFilms().then((filmData) => {
+    loadFilmsAll().then((filmData) => {
       dispatch(readFilms(filmData));
       setIsLoading(false);
     });
