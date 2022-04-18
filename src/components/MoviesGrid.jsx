@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import MovieCard from "./MovieCard";
 import styles from "../styles/MoviesGrid.module.css";
-import { get } from "../utils/httpClient";
+// import { get } from "../utils/httpClient";
+import {loadFilms} from "../actions/film";
 import Spinner from "./Spinner";
 import { useQuery } from "../hooks/useQuery";
 
@@ -14,11 +15,8 @@ const MoviesGrid = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    const searchUrl = search
-      ? "/search/movie?query=" + search + "&language=es-mx"
-      : "/movie/now_playing?language=es-mx";
-    get(searchUrl).then((data) => {
-      setmovies(data.results);
+    loadFilms('Cartelera').then((data) => {
+      setmovies(data);
       setIsLoading(false);
     });
   }, [search]);

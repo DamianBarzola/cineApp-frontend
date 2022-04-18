@@ -1,16 +1,5 @@
-//Formato Pelicula
-// {
-//     id:1,
-//     name:"Gladiador",
-//     description:"Máximo, General de las Legiones Romanas ..."
-// }
 import { types } from "../types/types";
 import { url } from "../types/config";
-
-export const loadFilms = async () => {
-  const result = await fetch(url + "/peliculas/");
-  return result.json();
-};
 
 export const creteFilm = (data) => {
   return (dispatch, getstate) => {
@@ -51,6 +40,20 @@ export const updateFilm = (data) => {
         dispatch(update(data));
       });
   };
+};
+
+export const loadOneFilm = async (id) => {
+  const result = await fetch(url + "/peliculas/" + id);
+  return result.json();
+};
+export const loadFilmsAll = async () => {
+  const result = await fetch(url + "/peliculas/");
+  return result.json();
+};
+
+export const loadFilms = async (state) => {
+  const result = await fetch(url + "/peliculas/all/" + state);
+  return result.json();
 };
 
 /*-------------------------Save Data--------------------------------- */

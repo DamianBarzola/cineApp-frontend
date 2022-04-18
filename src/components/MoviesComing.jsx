@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import MovieCard from "./MovieCard";
 import styles from "../styles/MoviesGrid.module.css";
-import { get } from "../utils/httpClient";
+// import { get } from "../utils/httpClient";
+import {loadFilms} from "../actions/film";
 import Spinner from "./Spinner";
 
 const MoviesGrid = () => {
@@ -10,8 +11,8 @@ const MoviesGrid = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    get("/movie/upcoming?language=es-mx").then((data) => {
-      setmovies(data.results);
+    loadFilms('Proximamente').then((data) => {
+      setmovies(data);
       setIsLoading(false);
     });
   }, []);
