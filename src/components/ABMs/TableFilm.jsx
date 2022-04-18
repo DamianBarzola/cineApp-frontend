@@ -38,6 +38,7 @@ const TableFilm = () => {
                 <th>Descripcion</th>
                 <th>Duración</th>
                 <th>Poster</th>
+                <th>Estado</th>
                 <th white-space="nowrap" width="1%" colSpan="2">
                   Accion
                 </th>

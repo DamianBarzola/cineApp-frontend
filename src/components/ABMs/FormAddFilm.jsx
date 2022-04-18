@@ -11,9 +11,10 @@ const FormAddFilm = () => {
     description: "",
     duration: "",
     poster: "",
+    state: "Cartelera",
   });
 
-  const { name, description, duration, poster } = data;
+  const { name, description, duration, poster, state } = data;
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -46,6 +47,7 @@ const FormAddFilm = () => {
         description: "",
         duration: "",
         poster: "",
+        state: "Cartelera",
       });
     }
   };
@@ -97,7 +99,7 @@ const FormAddFilm = () => {
                   className="form-control"
                   name="description"
                   placeholder="Descripción"
-                  maxLength="300"
+                  maxLength="1500"
                 />
               </p>
             </div>
@@ -122,9 +124,21 @@ const FormAddFilm = () => {
                   className="form-control"
                   name="poster"
                   placeholder="Link Poster"
-                  maxLength="50"
+                  maxLength="500"
                 />
               </p>
+            </div>
+            <div className="mb-3">
+              <select
+                value={state}
+                onChange={handleChange}
+                name="state"
+                className="form-select"
+                aria-label="Seleccionar estado"
+              >
+                <option value="Cartelera">En Cartelera</option>
+                <option value="Proximamente">Proximamente</option>
+              </select>
             </div>
             <div className="modal-footer d-flex text-center">
               <button

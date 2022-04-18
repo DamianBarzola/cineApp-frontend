@@ -13,16 +13,51 @@
 //       "state": true
 //     }
 import { types } from "../types/types";
-const url = "http://localhost:8080";
+import { url } from "../types/config";
 
 export const loadShows = async () => {
-  const result = await fetch(url + "/funcion/all");
+  const result = await fetch(url + "/funciones/", {
+    method: "GET",
+  });
   return result.json();
 };
 
+export const creteShow = (data) => {
+  return (dispatch, getstate) => {
+    fetch(url + "/funciones/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((datawithid) => {
+        dispatch(createShowData(datawithid));
+      });
+  };
+};
+
+export const deleteShow = (id) => {
+  return (dispatch) => {
+    fetch(url + "/funciones/" + id, {
+      method: "DELETE",
+    })
+      // .then((res) => res.json())
+      .then((data) => {
+        dispatch(deleteShowData(id));
+      });
+  };
+};
+
+/*-------------------------Save Data--------------------------------- */
 export const readShows = (data) => {
   return {
     type: types.showRead,
+    payload: data,
+  };
+};
+export const createShowData = (data) => {
+  return {
+    type: types.showAdd,
     payload: data,
   };
 };
@@ -30,5 +65,12 @@ export const readShows = (data) => {
 export const clearShowData = () => {
   return {
     type: types.showClean,
+  };
+};
+
+export const deleteShowData = (id) => {
+  return {
+    type: types.showDelete,
+    payload: id,
   };
 };

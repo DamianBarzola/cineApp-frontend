@@ -1,19 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import { deleteFilm, updateFilm } from "../../actions/film.js";
 
 const ElementFilm = ({ data }) => {
-  const { id, name, description, duration, poster } = data;
-
   const dispatch = useDispatch();
-  const [modalModify, setModalModify] = useState(false);
 
+  const [modalModify, setModalModify] = useState(false);
   const toggleModify = () => setModalModify(!modalModify);
 
   const [modalDelete, setModalDelete] = useState(false);
-
   const toggleDelete = () => setModalDelete(!modalDelete);
+
+  const { id, name, description, duration, poster, state } = data;
 
   const handleDelete = () => {
     dispatch(deleteFilm(id));
@@ -25,12 +24,13 @@ const ElementFilm = ({ data }) => {
     description: description,
     duration: duration,
     poster: poster,
+    state: state,
   });
 
   const handleChange = (e) => {
     const value = e.target.value;
     setNewData({
-      ...data,
+      ...newData,
       [e.target.name]: value,
     });
   };
@@ -62,7 +62,12 @@ const ElementFilm = ({ data }) => {
       <td>{name}</td>
       <td>{description}</td>
       <td>{duration + " min"}</td>
-      <td>{poster}</td>
+      <td>
+        <a href={poster} target="_blank" rel="noopener noreferrer">
+          Ver
+        </a>
+      </td>
+      <td>{state}</td>
       <td>
         <button
           className="btn btn-danger me-3"
@@ -81,7 +86,7 @@ const ElementFilm = ({ data }) => {
           </svg>
         </button>
       </td>
-      <td className="m-">
+      <td>
         {" "}
         <button
           className="btn btn-warning"
@@ -166,6 +171,18 @@ const ElementFilm = ({ data }) => {
                   placeholder="Link Poster"
                 />
               </p>
+            </div>
+            <div className="mb-3">
+              <select
+                value={state}
+                onChange={handleChange}
+                name="state"
+                className="form-select"
+                aria-label="Seleccionar estado"
+              >
+                <option value="Cartelera">En Cartelera</option>
+                <option value="Proximamente">Proximamente</option>
+              </select>
             </div>
             <div className="modal-footer d-flex text-center">
               <button

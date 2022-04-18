@@ -1,13 +1,52 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
+import { creteShow } from "../../actions/show";
 
 const FormAddShow = () => {
+  const films = useSelector((state) => state.film.data);
+  const salas = useSelector((state) => state.sala.data);
   const dispatch = useDispatch();
 
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
+
+  const [show, setShow] = useState({
+    fechaFuncion: "",
+    pelicula_id: "",
+    sala_id: "",
+  });
+
+  const { fechaFuncion, pelicula_id, sala_id } = show;
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setShow({
+      ...show,
+      [e.target.name]: value,
+    });
+  };
+
+  const handleAdd = (e) => {
+    e.preventDefault();
+    if (
+      fechaFuncion.trim() === "" ||
+      pelicula_id.trim() === "" ||
+      sala_id.trim() === ""
+    ) {
+      return alert("Complete los campos"); //ver para cambiar
+    } else {
+      dispatch(creteShow(show));
+      toggle();
+      setShow({
+        fechaFuncion: "",
+        pelicula_id: "",
+        sala_id: "",
+      });
+    }
+  };
+
   return (
     <div className="modalcss">
       <button type="button" className="btn btn-success  mb-2" onClick={toggle}>
@@ -31,45 +70,59 @@ const FormAddShow = () => {
         <ModalBody className="text-dark">
           <form>
             <div className="mb-3">
-              <p>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="recipient-name"
-                  placeholder="Pelicula (combobox)"
-                />
-              </p>
+              <select
+                value={pelicula_id}
+                onChange={handleChange}
+                name="pelicula_id"
+                className="form-select"
+                aria-label="Seleccionar estado"
+              >
+                <option value="" disabled hidden>
+                  Elegir Pelicula
+                </option>
+                {films.map((film) => {
+                  return (
+                    <option value={film.id} key={film.id}>
+                      {film.name}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+            <div className="mb-3">
+              <select
+                value={sala_id}
+                onChange={handleChange}
+                name="sala_id"
+                className="form-select"
+              >
+                <option value="" disabled hidden>
+                  Elegir Sala
+                </option>
+                {salas.map((sala) => {
+                  return (
+                    <option value={sala.id} key={sala.id}>
+                      {sala.name}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
             <div className="mb-3">
               <p>
                 <input
-                  type="text"
+                  onChange={handleChange}
+                  value={fechaFuncion}
+                  name="fechaFuncion"
+                  type="Date"
                   className="form-control"
+                  min={new Date().toISOString().slice(0, 10)}
                   id="recipient-name"
-                  placeholder="Sala (combobox)"
+                  placeholder="Fecha"
                 />
               </p>
             </div>
-            <div className="mb-3">
-              <p>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="recipient-name"
-                  placeholder="Fecha (calendar?)"
-                />
-              </p>
-            </div>
-            <div className="mb-3">
-              <p>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="recipient-name"
-                  placeholder="Horario (checks o combobox)"
-                />
-              </p>
-            </div>
+
             <div className="modal-footer d-flex text-center">
               <button
                 type="button"
@@ -78,7 +131,11 @@ const FormAddShow = () => {
               >
                 Cerrar
               </button>
-              <button type="submit" className="btn btn-primary">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={handleAdd}
+              >
                 Guardar
               </button>
             </div>

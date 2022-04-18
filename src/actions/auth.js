@@ -1,8 +1,9 @@
 import { types } from "../types/types";
+import { url } from "../types/config";
 export const emailAndPasslogin = (email, password) => {
   const datos = { email: email, password: password };
   return (dispatch) => {
-    fetch("http://localhost:8080/users/login", {
+    fetch(url + "/users/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(datos),
@@ -17,6 +18,9 @@ export const emailAndPasslogin = (email, password) => {
       .catch((e) => dispatch(errorMsg("Datos Incorrectos")));
   };
 };
+
+/*-------------------------Save Data--------------------------------- */
+
 export const login = (fullname, email) => {
   return {
     type: types.login,

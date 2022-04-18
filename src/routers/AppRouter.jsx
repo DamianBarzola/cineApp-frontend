@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { login, logout } from "../actions/auth";
 import PublicRouter from "./PublicRouter";
 import PrivateRouter from "./PrivateRouter";
+import { Redirect } from "react-router-dom";
 
 const AppRouter = () => {
   const dispatch = useDispatch();
@@ -44,7 +45,8 @@ const AppRouter = () => {
             <Route exact path="/comingsoon" component={ComingSoon} />
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/tickets" component={Tickets} />
-            <Route path="/" component={Landing} />
+            <Route path="/">{<Redirect to="/movies" />}</Route>
+            {/* <Route path="/" component={Landing} /> */}
           </Switch>
         </main>
         <footer>

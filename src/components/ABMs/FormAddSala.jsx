@@ -1,10 +1,46 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
+import { createSala } from "../../actions/sala";
 
 const FormAddShow = () => {
+  const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
+  const [sala, setSala] = useState({
+    name: "",
+    state: "true",
+    number_column: "",
+    number_row: "",
+  });
+
+  const { name, state, number_column, number_row } = sala;
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setSala({
+      ...sala,
+      [e.target.name]: value,
+    });
+  };
+
+  const handleAdd = (e) => {
+    e.preventDefault();
+    if (name.trim() === "") {
+      //falta validar formato
+      return alert("Complete los campos"); //ver para cambiar
+    } else {
+      dispatch(createSala(sala));
+      toggle();
+      setSala({
+        name: "",
+        state: "true",
+        number_column: "",
+        number_row: "",
+      });
+    }
+  };
 
   return (
     <div className="modalcss">
@@ -31,22 +67,48 @@ const FormAddShow = () => {
             <div className="mb-3">
               <p>
                 <input
+                  onChange={handleChange}
+                  value={name}
                   type="text"
                   className="form-control"
-                  id="recipient-name"
-                  placeholder="Nombre"
+                  name="name"
+                  placeholder="Nombre de la Sala"
+                  maxLength="75"
                 />
               </p>
             </div>
             <div className="mb-3">
-              <p>
+              <div className="d-flex">
                 <input
-                  type="text"
-                  className="form-control"
-                  id="recipient-name"
-                  placeholder="Estado(combobox)"
+                  onChange={handleChange}
+                  value={number_row}
+                  type="number"
+                  className="form-control me-1"
+                  name="number_row"
+                  placeholder="Nro de la Filas"
                 />
-              </p>
+                <input
+                  onChange={handleChange}
+                  value={number_column}
+                  type="number"
+                  className="form-control ms-1"
+                  name="number_column"
+                  placeholder="Nro de Butacas por Fila"
+                />
+              </div>
+            </div>
+
+            <div className="mb-3">
+              <select
+                value={state}
+                onChange={handleChange}
+                name="state"
+                className="form-select"
+                aria-label="Estado"
+              >
+                <option value={true}>Disponible</option>
+                <option value={false}>No Disponible</option>
+              </select>
             </div>
 
             <div className="modal-footer d-flex text-center">
@@ -57,7 +119,11 @@ const FormAddShow = () => {
               >
                 Cerrar
               </button>
-              <button type="submit" className="btn btn-primary">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={handleAdd}
+              >
                 Guardar
               </button>
             </div>

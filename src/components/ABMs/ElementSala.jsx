@@ -1,23 +1,56 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
+import { deleteSala, updateSala } from "../../actions/sala.js";
 
 const ElementSala = ({ data }) => {
-  const { id, name, state } = data;
   const dispatch = useDispatch();
   const [modalModify, setModalModify] = useState(false);
-
   const toggleModify = () => setModalModify(!modalModify);
 
   const [modalDelete, setModalDelete] = useState(false);
-
   const toggleDelete = () => setModalDelete(!modalDelete);
+
+  const { id, name, state, number_column, number_row } = data;
+
+  const handleDelete = () => {
+    dispatch(deleteSala(id));
+  };
+
+  const [newData, setNewData] = useState({
+    id: id,
+    name: name,
+    number_column: number_column,
+    number_row: number_row,
+    state: state,
+  });
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setNewData({
+      ...newData,
+      [e.target.name]: value,
+    });
+  };
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    if (name.trim() === "") {
+      //falta validar formato
+      return alert("Complete los campos"); //ver para cambiar
+    } else {
+      dispatch(updateSala(newData));
+      toggleModify();
+    }
+  };
 
   return (
     <>
       <td>{id}</td>
       <td>{name}</td>
-      <td>{state ? "Disponible" : "No Disponible"}</td>
+      <td>{number_row}</td>
+      <td>{number_column}</td>
+      <td>{state === "true" ? "Disponible" : "No Disponible"}</td>
       <td>
         <button
           className="btn btn-danger me-3"
@@ -36,7 +69,7 @@ const ElementSala = ({ data }) => {
           </svg>
         </button>
       </td>
-      <td className="m-">
+      <td>
         {" "}
         <button
           className="btn btn-warning"
@@ -61,7 +94,7 @@ const ElementSala = ({ data }) => {
           Sala - Modificar Datos
         </ModalHeader>
         <ModalBody className="text-dark">
-          <form>
+          <form onSubmit={handleUpdate}>
             <div className="mb-3">
               <p>
                 <input
@@ -69,6 +102,7 @@ const ElementSala = ({ data }) => {
                   className="form-control"
                   id="recipient-name"
                   placeholder="Id"
+                  value={id}
                   disabled
                 />
               </p>
@@ -76,22 +110,50 @@ const ElementSala = ({ data }) => {
             <div className="mb-3">
               <p>
                 <input
+                  onChange={handleChange}
+                  value={newData.name}
                   type="text"
                   className="form-control"
-                  id="recipient-name"
-                  placeholder="Nombre"
+                  name="name"
+                  placeholder="Nombre de la Sala"
+                  maxLength="75"
                 />
               </p>
             </div>
             <div className="mb-3">
-              <p>
+              <div className="d-flex">
                 <input
-                  type="text"
-                  className="form-control"
-                  id="recipient-name"
-                  placeholder="Estado(combobox)"
+                  onChange={handleChange}
+                  value={newData.number_row}
+                  type="number"
+                  className="form-control me-1"
+                  name="number_row"
+                  placeholder="Nro de la Filas"
+                  disabled
                 />
-              </p>
+                <input
+                  onChange={handleChange}
+                  value={newData.number_column}
+                  type="number"
+                  className="form-control ms-1"
+                  name="number_column"
+                  placeholder="Nro de Butacas por Fila"
+                  disabled
+                />
+              </div>
+            </div>
+
+            <div className="mb-3">
+              <select
+                onChange={handleChange}
+                value={newData.state}
+                name="state"
+                className="form-select"
+                aria-label="Estado"
+              >
+                <option value={true}>Disponible</option>
+                <option value={false}>No Disponible</option>
+              </select>
             </div>
 
             <div className="modal-footer d-flex text-center">
@@ -125,7 +187,7 @@ const ElementSala = ({ data }) => {
           <button
             type="button"
             className="btn btn-primary"
-            // onClick={handleDelete}
+            onClick={handleDelete}
           >
             Aceptar
           </button>

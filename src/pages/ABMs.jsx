@@ -32,7 +32,7 @@ const ABMs = () => {
 
   return (
     <div className="container">
-      <div className="row d-flex justify-content-center text-center p-4 ">
+      <div className="row d-flex justify-content-center text-center p-md-4 ">
         <div
           className={styles.containerCard + " container col-md-12 p-4 bg-dark"}
         >

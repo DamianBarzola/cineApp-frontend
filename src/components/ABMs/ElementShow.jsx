@@ -1,25 +1,29 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
+import { deleteShow } from "../../actions/show";
+import { transformDateFormat } from "../../utils/validations";
 
 const ElementShow = ({ data }) => {
-  const { id, pelicula, sala } = data;
   const dispatch = useDispatch();
-  const [modalModify, setModalModify] = useState(false);
 
+  const [modalModify, setModalModify] = useState(false);
   const toggleModify = () => setModalModify(!modalModify);
 
   const [modalDelete, setModalDelete] = useState(false);
-
   const toggleDelete = () => setModalDelete(!modalDelete);
 
+  const { id, pelicula, sala, fechaFuncion } = data;
+
+  const handleDelete = () => {
+    dispatch(deleteShow(id));
+  };
   return (
     <>
       <td>{id}</td>
       <td>{pelicula.name}</td>
       <td>{sala.name}</td>
-      <td>Falta</td>
-      <td>Falta</td>
+      <td>{fechaFuncion && transformDateFormat(fechaFuncion)}</td>
       <td>
         <button
           className="btn btn-danger me-3"
@@ -146,7 +150,7 @@ const ElementShow = ({ data }) => {
           <button
             type="button"
             className="btn btn-primary"
-            // onClick={handleDelete}
+            onClick={handleDelete}
           >
             Aceptar
           </button>

@@ -6,7 +6,7 @@ const initialState = {
 export const showReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.showAdd:
-      return {};
+      return { ...state, data: [...state.data, action.payload] };
     case types.showRead:
       return {
         ...state,

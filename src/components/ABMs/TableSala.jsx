@@ -13,7 +13,6 @@ const TableSala = () => {
   useEffect(() => {
     setIsLoading(true);
     loadSalas().then((salaData) => {
-      console.log(salaData);
       dispatch(readSalas(salaData));
       setIsLoading(false);
     });
@@ -34,6 +33,8 @@ const TableSala = () => {
               <tr>
                 <th>Id</th>
                 <th>Nombre</th>
+                <th>Nº de Filas</th>
+                <th>Nº de Columnas</th>
                 <th>Estado</th>
                 <th white-space="nowrap" width="1%" colSpan="2">
                   Accion

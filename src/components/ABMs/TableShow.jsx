@@ -13,7 +13,6 @@ const TableShow = () => {
   useEffect(() => {
     setIsLoading(true);
     loadShows().then((showData) => {
-      console.log(showData);
       dispatch(readShows(showData));
       setIsLoading(false);
     });
@@ -24,7 +23,7 @@ const TableShow = () => {
   }
   return (
     <div>
-      <div className="container col-md-11  ">
+      <div className="container col-md-11">
         <div className="d-flex justify-content-end pr-2">
           <FormAddShow />
         </div>
@@ -36,7 +35,6 @@ const TableShow = () => {
                 <th>Pelicula</th>
                 <th>Sala</th>
                 <th>Fecha</th>
-                <th>Horario</th>
                 <th white-space="nowrap" width="1%" colSpan="2">
                   Accion
                 </th>
