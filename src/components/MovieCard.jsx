@@ -3,19 +3,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const MovieCard = ({ movie }) => {
-  const imageurl = "https://image.tmdb.org/t/p/w300" + movie.poster_path;
-
   return (
     <li className={styles.movieCard}>
       <Link to={"/movies/" + movie.id}>
         <img
           width="auto"
           height={300}
-          className={styles.movieImage}
-          src={imageurl}
-          alt={movie.title}
+          src={movie.poster}
+          alt={movie.name}
         />
-        <div className={styles.title}>{movie.title}</div>
+        <div className={styles.title}>{movie.name}</div>
       </Link>
     </li>
   );

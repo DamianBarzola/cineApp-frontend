@@ -30,8 +30,13 @@ export const create = (data) => {
   };
 };
 
-export const loadFilms = async () => {
-  const result = await fetch(url + "/pelicula/all");
+export const loadFilms = async (state) => {
+  const result = await fetch(url + "/peliculas/all/" + state);
+  return result.json();
+};
+
+export const loadOneFilm = async (id) => {
+  const result = await fetch(url + "/peliculas/" + id);
   return result.json();
 };
 

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "../styles/MovieDetails.module.css";
 import { useParams } from "react-router";
-import { get } from "../utils/httpClient";
+// import { get } from "../utils/httpClient";
+import {loadOneFilm} from "../actions/film";
 import Spinner from "../components/Spinner";
 
 const MovieDetails = () => {
@@ -10,7 +11,7 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
   useEffect(() => {
     setIsLoading(true);
-    get("/movie/" + movieId + "?language=es-mx").then((data) => {
+    loadOneFilm(movieId).then((data) => {
       setMovie(data);
       console.log(data);
       setIsLoading(false);
@@ -24,34 +25,25 @@ const MovieDetails = () => {
   if (!movie) {
     return null;
   }
-
-  const imageurl = "https://image.tmdb.org/t/p/w500" + movie.poster_path;
   return (
     <div className={styles.detailscontainer}>
       <img
         className={`${styles.col} ${styles.movieImage}`}
-        src={imageurl}
-        alt={movie.title}
+        src={movie.poster}
+        alt={movie.name}
       />
       <div className={`${styles.col} ${styles.movieDetails}`}>
         <p className={styles.firstitem}>
           <b>Título: </b>
-          {movie.title}
-        </p>
-        <p>
-          <b>Fecha de Estreno:</b> {movie.release_date}
-        </p>
-        <p>
-          <b>Género: </b>
-          {movie.genres.map((genre) => genre.name).join(", ")}
+          {movie.name}
         </p>
         <p>
           <b>Duración: </b>
-          {movie.runtime} Min.
+          {movie.duration} Min.
         </p>
         <p>
           <b> Descripción: </b>
-          {movie.overview}
+          {movie.description}
         </p>
       </div>
     </div>
