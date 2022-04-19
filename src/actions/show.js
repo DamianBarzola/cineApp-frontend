@@ -1,17 +1,3 @@
-// {  Formato
-//     "id": 1,
-//     "pelicula": {
-//       "id": 3,
-//       "name": "El padrino",
-//       "description": "Don Vito Corleone, conocido dentro de los círculos del hampa como \"El Padrino\", es el patriarca de una de las cinco familias que ejercen el mando de la Cosa Nostra en Nueva York en los años 40.",
-//       "duration": 150,
-//       "poster": "/wLXd1Cd0XW7DhXayfC0Ok5ago9r.jpg"
-//     },
-//     "sala": {
-//       "id": 1,
-//       "name": "Sala Terciaria",
-//       "state": true
-//     }
 import { types } from "../types/types";
 import { url } from "../types/config";
 
@@ -48,6 +34,20 @@ export const deleteShow = (id) => {
   };
 };
 
+export const updateShow = (data) => {
+  return (dispatch) => {
+    fetch(url + "/funciones/" + data.id, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((ResData) => {
+        dispatch(updateShowData(ResData));
+      });
+  };
+};
+
 /*-------------------------Save Data--------------------------------- */
 export const readShows = (data) => {
   return {
@@ -65,6 +65,12 @@ export const createShowData = (data) => {
 export const clearShowData = () => {
   return {
     type: types.showClean,
+  };
+};
+export const updateShowData = (data) => {
+  return {
+    type: types.showModify,
+    payload: data,
   };
 };
 

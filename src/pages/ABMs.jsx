@@ -185,7 +185,9 @@ const ABMs = () => {
                   id="i2-Section4"
                   tabIndex="-1"
                 >
-                  <div>{/* <TableButaca /> */}</div>
+                  <div>
+                    <TableButaca />
+                  </div>
                 </section>
               </div>
             </div>

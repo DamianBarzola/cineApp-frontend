@@ -13,9 +13,24 @@ export const showReducer = (state = initialState, action) => {
         data: action.payload,
       };
     case types.showModify:
-      return {};
+      const indexUpd = state.data.findIndex(
+        (show) => show.id === action.payload.id
+      );
+      return {
+        ...state,
+        data: [
+          ...state.data.slice(0, indexUpd),
+          action.payload,
+          ...state.data.slice(indexUpd + 1),
+        ],
+      };
     case types.showDelete:
-      return {};
+      return {
+        ...state,
+        data: state.data.filter((sala) => {
+          return sala.id !== action.payload;
+        }),
+      };
     case types.showClean:
       return { ...state, data: [] };
     default:

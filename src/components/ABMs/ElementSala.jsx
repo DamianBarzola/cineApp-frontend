@@ -43,14 +43,15 @@ const ElementSala = ({ data }) => {
       toggleModify();
     }
   };
-
   return (
     <>
       <td>{id}</td>
       <td>{name}</td>
       <td>{number_row}</td>
       <td>{number_column}</td>
-      <td>{state === "true" ? "Disponible" : "No Disponible"}</td>
+      <td>
+        {state === true || state === "true" ? "Disponible" : "No Disponible"}
+      </td>
       <td>
         <button
           className="btn btn-danger me-3"

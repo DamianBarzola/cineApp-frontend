@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import { creteShow } from "../../actions/show";
@@ -6,6 +6,7 @@ import { creteShow } from "../../actions/show";
 const FormAddShow = () => {
   const films = useSelector((state) => state.film.data);
   const salas = useSelector((state) => state.sala.data);
+
   const dispatch = useDispatch();
 
   const [modal, setModal] = useState(false);
@@ -81,11 +82,15 @@ const FormAddShow = () => {
                   Elegir Pelicula
                 </option>
                 {films.map((film) => {
-                  return (
-                    <option value={film.id} key={film.id}>
-                      {film.name}
-                    </option>
-                  );
+                  if (film.state === "Cartelera") {
+                    return (
+                      <option value={film.id} key={film.id}>
+                        {film.name}
+                      </option>
+                    );
+                  } else {
+                    return null;
+                  }
                 })}
               </select>
             </div>
@@ -100,11 +105,15 @@ const FormAddShow = () => {
                   Elegir Sala
                 </option>
                 {salas.map((sala) => {
-                  return (
-                    <option value={sala.id} key={sala.id}>
-                      {sala.name}
-                    </option>
-                  );
+                  if (sala.state === "true" || sala.state === true) {
+                    return (
+                      <option value={sala.id} key={sala.id}>
+                        {sala.name}
+                      </option>
+                    );
+                  } else {
+                    return null;
+                  }
                 })}
               </select>
             </div>

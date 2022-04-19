@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
-import { deleteShow } from "../../actions/show";
+import { deleteShow, updateShow } from "../../actions/show";
 import { transformDateFormat } from "../../utils/validations";
 
 const ElementShow = ({ data }) => {
+  const films = useSelector((state) => state.film.data);
+  const salas = useSelector((state) => state.sala.data);
   const dispatch = useDispatch();
 
   const [modalModify, setModalModify] = useState(false);
@@ -15,8 +17,37 @@ const ElementShow = ({ data }) => {
 
   const { id, pelicula, sala, fechaFuncion } = data;
 
+  const [newData, setNewData] = useState({
+    id: id,
+    fechaFuncion: fechaFuncion,
+    pelicula_id: pelicula.id,
+    sala_id: sala.id,
+  });
   const handleDelete = () => {
     dispatch(deleteShow(id));
+  };
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setNewData({
+      ...newData,
+      [e.target.name]: value,
+    });
+  };
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    console.log(newData);
+    if (
+      newData.fechaFuncion.trim() === "" ||
+      String(newData.pelicula_id).trim() === "" ||
+      String(newData.sala_id).trim() === ""
+    ) {
+      //falta validar formato
+      return alert("Complete los campos"); //ver para cambiar
+    } else {
+      dispatch(updateShow(newData));
+      toggleModify();
+    }
   };
   return (
     <>
@@ -67,7 +98,7 @@ const ElementShow = ({ data }) => {
           Funcion - Modificar Datos
         </ModalHeader>
         <ModalBody className="text-dark">
-          <form>
+          <form onSubmit={handleUpdate}>
             <div className="mb-3">
               <p>
                 <input
@@ -75,47 +106,68 @@ const ElementShow = ({ data }) => {
                   className="form-control"
                   id="recipient-name"
                   placeholder="Id"
+                  value={id}
                   disabled
                 />
               </p>
             </div>
             <div className="mb-3">
-              <p>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="recipient-name"
-                  placeholder="Pelicula"
-                />
-              </p>
+              <select
+                value={newData.pelicula_id}
+                onChange={handleChange}
+                name="pelicula_id"
+                className="form-select"
+              >
+                <option value="" disabled hidden>
+                  Elegir Pelicula
+                </option>
+                {films.map((film) => {
+                  if (film.state === "Cartelera") {
+                    return (
+                      <option value={film.id} key={film.id}>
+                        {film.name}
+                      </option>
+                    );
+                  } else {
+                    return null;
+                  }
+                })}
+              </select>
+            </div>
+            <div className="mb-3">
+              <select
+                value={newData.sala_id}
+                onChange={handleChange}
+                name="sala_id"
+                className="form-select"
+              >
+                <option value="" disabled hidden>
+                  Elegir Sala
+                </option>
+                {salas.map((sala) => {
+                  if (sala.state === "true" || sala.state === true) {
+                    return (
+                      <option value={sala.id} key={sala.id}>
+                        {sala.name}
+                      </option>
+                    );
+                  } else {
+                    return null;
+                  }
+                })}
+              </select>
             </div>
             <div className="mb-3">
               <p>
                 <input
-                  type="text"
+                  onChange={handleChange}
+                  value={newData.fechaFuncion}
+                  name="fechaFuncion"
+                  type="Date"
                   className="form-control"
-                  id="recipient-name"
-                  placeholder="Sala"
-                />
-              </p>
-            </div>
-            <div className="mb-3">
-              <p>
-                <input
-                  type="text"
-                  className="form-control"
+                  min={new Date().toISOString().slice(0, 10)}
                   id="recipient-name"
                   placeholder="Fecha"
-                />
-              </p>
-            </div>
-            <div className="mb-3">
-              <p>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="recipient-name"
-                  placeholder="Horario"
                 />
               </p>
             </div>
