@@ -24,7 +24,11 @@ export const createSala = (data) => {
     })
       .then((res) => res.json())
       .then((datawithid) => {
-        dispatch(createSalaData(datawithid));
+        // console.log(datawithid);
+        // dispatch(createSalaData(datawithid));
+        loadSalas().then((salaData) => {
+          dispatch(readSalas(salaData));
+        });
       });
   };
 };

@@ -35,7 +35,7 @@ const ElementSala = ({ data }) => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    if (name.trim() === "") {
+    if (String(name).trim() === "") {
       //falta validar formato
       return alert("Complete los campos"); //ver para cambiar
     } else {

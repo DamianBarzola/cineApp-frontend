@@ -44,12 +44,13 @@ const ElementFilm = ({ data }) => {
     ) {
       //falta validar formato
       return alert("Complete los campos"); //ver para cambiar
-    } else if (
-      /[^A-Za-z\d\s.,;:\u00E0-\u00FC]/.test(name) || //falta permitir acentos y ñ
-      /[^A-Za-z\d\s.,;:\u00E0-\u00FC]/.test(description) ||
-      /[^A-Za-z\d\s./]/.test(poster)
-    ) {
-      return alert("Formato no valido"); //ver para cambiar
+      // } else if (
+      //   /[^A-Za-z\d\s.,;:\u00E0-\u00FC]/.test(name) || //falta permitir acentos y ñ
+      //   /[^A-Za-z\d\s.,;:\u00E0-\u00FC]/.test(description) ||
+      //   /[^A-Za-z\d\s./]/.test(poster)
+      // )
+      // {
+      //   return alert("Formato no valido"); //ver para cambiar
     } else {
       dispatch(updateFilm(newData));
       toggleModify();

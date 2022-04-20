@@ -4,12 +4,14 @@ import thunk from "redux-thunk";
 import { filmReducer } from "../reducers/filmReducer";
 import { showReducer } from "../reducers/showReducer";
 import { salaReducer } from "../reducers/salaReducer";
+import { butacaReducer } from "../reducers/butacaReducer";
 
 const reducers = combineReducers({
   auth: authReducer,
   film: filmReducer,
   show: showReducer,
   sala: salaReducer,
+  butaca: butacaReducer,
 });
 
 const composeEnhancers =

@@ -10,6 +10,7 @@ import { logout } from "../actions/auth";
 import { clearFilmData } from "../actions/film";
 import { clearShowData } from "../actions/show";
 import { clearSalaData } from "../actions/sala";
+import { clearButacaData } from "../actions/butaca";
 
 const ABMs = () => {
   const { auth } = useSelector((state) => state);
@@ -26,6 +27,7 @@ const ABMs = () => {
     dispatch(clearFilmData());
     dispatch(clearShowData());
     dispatch(clearSalaData());
+    dispatch(clearButacaData());
     window.location.reload(); //ver para cambiar
     JSON.parse(localStorage.removeItem("user"));
   };
