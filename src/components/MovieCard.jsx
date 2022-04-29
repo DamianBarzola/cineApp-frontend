@@ -11,6 +11,7 @@ const MovieCard = ({ movie }) => {
           height={300}
           src={movie.poster}
           alt={movie.name}
+          className="rounded"
         />
         <div className={styles.title}>{movie.name}</div>
       </Link>

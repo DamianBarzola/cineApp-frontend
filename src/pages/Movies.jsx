@@ -5,7 +5,7 @@ import Search from "../components/Search";
 const Movies = () => {
   return (
     <>
-      <Search />
+      {/* <Search /> */}
       <MoviesGrid />
     </>
   );

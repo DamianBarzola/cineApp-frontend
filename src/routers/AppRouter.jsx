@@ -16,6 +16,8 @@ import { login, logout } from "../actions/auth";
 import PublicRouter from "./PublicRouter";
 import PrivateRouter from "./PrivateRouter";
 import { Redirect } from "react-router-dom";
+import SalesPerShow from "../pages/SalesPerShow";
+import SalesPerMovie from "../pages/SalesPerMovie";
 
 const AppRouter = () => {
   const dispatch = useDispatch();
@@ -40,6 +42,8 @@ const AppRouter = () => {
           <Switch>
             <PublicRouter exact path="/login" log={log} component={Login} />
             <PrivateRouter exact path="/abm" log={log} component={ABMs} />
+            <Route exact path="/salespershow" component={SalesPerShow} />
+            <Route exact path="/salespermovie" component={SalesPerMovie} />
             <Route exact path="/movies/:movieId" component={MovieDetails} />
             <Route exact path="/movies" component={Movies} />
             <Route exact path="/comingsoon" component={ComingSoon} />

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Spinner } from "reactstrap";
 import { loadSalas, readSalas } from "../../actions/sala";
+import ConectionLost from "../MsgPages/ConectionLost";
 import ElementSala from "./ElementSala";
 import FormAddSala from "./FormAddSala";
 
@@ -9,17 +10,26 @@ const TableSala = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
   const salas = useSelector((state) => state.sala.data);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
-    loadSalas().then((salaData) => {
-      dispatch(readSalas(salaData));
-      setIsLoading(false);
-    });
+    loadSalas()
+      .then((salaData) => {
+        dispatch(readSalas(salaData));
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+        setError(true);
+      });
   }, [dispatch]);
 
   if (isLoading) {
     return <Spinner />;
+  }
+  if (error) {
+    return <ConectionLost />;
   }
   return (
     <div>

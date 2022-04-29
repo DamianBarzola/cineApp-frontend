@@ -13,6 +13,15 @@ const TableButaca = () => {
     const value = e.target.value;
     setSala(value);
   };
+
+  const buscar = (obj, num) => {
+    try {
+      return obj[num].butaca;
+    } catch (e) {
+      setSala(0);
+      return obj[0].butaca;
+    }
+  };
   return (
     <div>
       <div className="container col-md-11  ">
@@ -40,7 +49,7 @@ const TableButaca = () => {
 
             <tbody>
               {Object.keys(salas).length !== 0 &&
-                salas[sala].butaca.map((elemento) => {
+                buscar(salas, sala).map((elemento) => {
                   return (
                     <tr key={elemento.id}>
                       <ElementButaca data={elemento} />

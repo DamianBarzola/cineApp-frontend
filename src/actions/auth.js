@@ -1,5 +1,9 @@
 import { types } from "../types/types";
 import { url } from "../types/config";
+import { clearFilmData } from "./film";
+import { clearShowData } from "./show";
+import { clearSalaData } from "./sala";
+import { clearButacaData } from "./butaca";
 export const emailAndPasslogin = (email, password) => {
   const datos = { email: email, password: password };
   return (dispatch) => {
@@ -33,6 +37,11 @@ export const login = (fullname, email) => {
 export const logout = () => {
   return (dispatch) => {
     dispatch({ type: types.logout });
+    dispatch(clearFilmData());
+    dispatch(clearShowData());
+    dispatch(clearSalaData());
+    dispatch(clearButacaData());
+    JSON.parse(localStorage.removeItem("user"));
   };
 };
 export const errorMsg = (msg) => {

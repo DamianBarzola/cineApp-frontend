@@ -24,12 +24,12 @@ const ABMs = () => {
 
   const handleLogOut = () => {
     dispatch(logout());
-    dispatch(clearFilmData());
-    dispatch(clearShowData());
-    dispatch(clearSalaData());
-    dispatch(clearButacaData());
+    // dispatch(clearFilmData());
+    // dispatch(clearShowData());
+    // dispatch(clearSalaData());
+    // dispatch(clearButacaData());
     window.location.reload(); //ver para cambiar
-    JSON.parse(localStorage.removeItem("user"));
+    // JSON.parse(localStorage.removeItem("user"));
   };
 
   return (
@@ -79,6 +79,7 @@ const ABMs = () => {
                     aria-selected="false"
                     role="tab"
                     tabIndex="-1"
+                    style={{ width: "125px" }}
                   >
                     Peliculas
                   </button>
@@ -97,6 +98,7 @@ const ABMs = () => {
                     aria-selected="false"
                     role="tab"
                     tabIndex="-1"
+                    style={{ width: "125px" }}
                   >
                     Funciones
                   </button>
@@ -115,6 +117,7 @@ const ABMs = () => {
                     aria-selected="true"
                     role="tab"
                     tabIndex="0"
+                    style={{ width: "125px" }}
                   >
                     Salas
                   </button>
@@ -133,6 +136,7 @@ const ABMs = () => {
                     aria-selected="false"
                     role="tab"
                     tabIndex="-1"
+                    style={{ width: "125px" }}
                   >
                     Butacas
                   </button>

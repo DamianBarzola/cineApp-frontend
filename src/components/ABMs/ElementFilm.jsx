@@ -139,7 +139,7 @@ const ElementFilm = ({ data }) => {
             </div>
             <div className="mb-3">
               <p>
-                <input
+                <textarea
                   onChange={handleChange}
                   value={newData.description}
                   name="description"
