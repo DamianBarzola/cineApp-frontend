@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 // import { get } from "../utils/httpClient";
 import {loadOneFilm} from "../actions/film";
 import Spinner from "../components/Spinner";
+import { Link } from "react-router-dom";
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -45,9 +46,15 @@ const MovieDetails = () => {
           <b> Descripción: </b>
           {movie.description}
         </p>
+        <Link to={"/tickets/"} >
+          <button>
+              Comprar ahora
+          </button>
+        </Link>
       </div>
     </div>
   );
 };
+
 
 export default MovieDetails;
