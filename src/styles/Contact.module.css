@@ -35,7 +35,8 @@
     transition: all 0.2s ease;
     border-radius: 5px;
     border: none;
-    opacity:0.85;
+    background-color: #e91e63;
+    color: white;
     
 }
 .btn{
@@ -46,7 +47,32 @@
     border: none;
 }
 .btn:hover{
-    background-color: #e91e63;
+    color: black;
+    background-color: white;
+    cursor: pointer;
+    border: none;
+}
+
+.btnBack{
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    font-size: 0.9rem;
+    padding: 12px;
+    transition: all 0.2s ease;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background-color: #6c757d;
+    
+}
+.btnBack{
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;  
+    margin-top: 15px;  
+    border: none;
+}
+.btnBack:hover{
+    background-color: #5c636a;
     color: white;
     cursor: pointer;
     border: none;

@@ -28,7 +28,11 @@ const TableButaca = () => {
         <div className="d-flex justify-content-start  pr-2">
           <select className="form-select mt-3 mb-3 " onChange={handleChange}>
             {salas.map((sala, index) => {
-              return <option value={index}>{sala.name}</option>;
+              return (
+                <option value={index} key={index}>
+                  {sala.name}
+                </option>
+              );
             })}
           </select>
           {/* <FormAddButaca /> */}

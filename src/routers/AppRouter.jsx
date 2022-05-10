@@ -18,6 +18,9 @@ import PrivateRouter from "./PrivateRouter";
 import { Redirect } from "react-router-dom";
 import SalesPerShow from "../pages/SalesPerShow";
 import SalesPerMovie from "../pages/SalesPerMovie";
+import SaleSuccess from "../pages/SaleSuccess";
+import CancelSale from "../pages/CancelSale";
+import TicketCancelSuccess from "../pages/TicketCancelSuccess";
 
 const AppRouter = () => {
   const dispatch = useDispatch();
@@ -28,7 +31,7 @@ const AppRouter = () => {
       dispatch(login(user.fullname, user.email));
       setlog(true);
     } else {
-      dispatch(logout());
+      // dispatch(logout());
       setlog(false);
     }
   }, [dispatch, log]);
@@ -49,6 +52,13 @@ const AppRouter = () => {
             <Route exact path="/comingsoon" component={ComingSoon} />
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/tickets" component={Tickets} />
+            <Route exact path="/salesuccess" component={SaleSuccess} />
+            <Route exact path="/cancelsale" component={CancelSale} />
+            <Route
+              exact
+              path="/cancelsuccess"
+              component={TicketCancelSuccess}
+            />
             <Route path="/">{<Redirect to="/movies" />}</Route>
             {/* <Route path="/" component={Landing} /> */}
           </Switch>

@@ -15,6 +15,11 @@ export const filmReducer = (state = initialState, action) => {
         ...state,
         data: action.payload,
       };
+    case types.listperfilmRead:
+      return {
+        ...state,
+        list: action.payload,
+      };
     case types.filmModify:
       const indexUpd = state.data.findIndex(
         (film) => film.id === action.payload.id

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "../styles/MovieDetails.module.css";
+import stylesbutton from "../styles/Contact.module.css";
 import { useParams } from "react-router";
 // import { get } from "../utils/httpClient";
 import { loadOneFilm } from "../actions/film";
@@ -17,7 +18,6 @@ const MovieDetails = () => {
     loadOneFilm(movieId)
       .then((data) => {
         setMovie(data);
-        console.log(data);
         setIsLoading(false);
       })
       .catch(() => {
@@ -43,6 +43,11 @@ const MovieDetails = () => {
         className={`${styles.col} ${styles.movieImage}`}
         src={movie.poster}
         alt={movie.name}
+        onError={({ currentTarget }) => {
+          currentTarget.onerror = null; // prevents looping
+          currentTarget.src =
+            "https://www.2queue.com/2queue/wp-content/uploads/sites/6/tdomf/4299/movie-poster-coming-soon.png";
+        }}
       />
       <div className={`${styles.col} ${styles.movieDetails}`}>
         <p className={styles.firstitem}>
@@ -53,13 +58,20 @@ const MovieDetails = () => {
           <b>Duración: </b>
           {movie.duration} Min.
         </p>
-        <p>
-          <b> Descripción: </b>
-          {movie.description}
-        </p>
-        <Link to={"/tickets/"}>
-          <button>Comprar ahora</button>
-        </Link>
+        <div>
+          <p style={{ textAlign: "justify" }}>
+            <b> Descripción: </b>
+            {movie.description}
+          </p>
+        </div>
+
+        <div className="text-center">
+          <Link to={"/tickets/"}>
+            <button className={stylesbutton.btn + " mt-2"}>
+              Comprar Boletos
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

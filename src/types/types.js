@@ -8,12 +8,14 @@ export const types = {
   filmRead: `[Film] read`,
   filmModify: `[Film] modify`,
   filmClean: `[Film] clean`,
+  listperfilmRead: `[Film] listperfilm`,
 
   showAdd: `[Show] add`,
   showDelete: `[Show] delete`,
   showRead: `[Show] read`,
   showModify: `[Show] modify`,
   showClean: `[Show] clean`,
+  listpershowRead: `[Show] listpershow`,
 
   salaAdd: `[Sala] add`,
   salaDelete: `[Sala] delete`,
@@ -26,4 +28,10 @@ export const types = {
   butacaRead: `[Butaca] read`,
   butacaModify: `[Butaca] modify`,
   butacaClean: `[Butaca] clean`,
+
+  ticketSaleSuccess: `[TicketSale] success`,
+  ticketSaleRefused: `[TicketSale] refused payment`,
+  ticketSaleErrorConnection: `[TicketSale] errorConnection`,
+  ticketSaleClean: `[TicketSale] clean`,
+  ticketSaleCancel: `[TicketSale] cancel`,
 };

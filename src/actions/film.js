@@ -56,7 +56,22 @@ export const loadFilms = async (state) => {
   return result.json();
 };
 
+export const loadFilmsAvailable = async () => {
+  const result = await fetch(url + "/peliculas/available/");
+  return result.json();
+};
+
+export const loadSalesPerMovie = async () => {
+  const result = await fetch(url + "/reservas/listados/pelicula");
+  return result.json();
+};
 /*-------------------------Save Data--------------------------------- */
+export const readSales = (data) => {
+  return {
+    type: types.listperfilmRead,
+    payload: data,
+  };
+};
 
 export const create = (data) => {
   return {

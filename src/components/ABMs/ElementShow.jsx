@@ -15,14 +15,16 @@ const ElementShow = ({ data }) => {
   const [modalDelete, setModalDelete] = useState(false);
   const toggleDelete = () => setModalDelete(!modalDelete);
 
-  const { id, pelicula, sala, fechaFuncion } = data;
+  const { id, pelicula, sala, fechaFuncion, horaFuncion } = data;
 
   const [newData, setNewData] = useState({
     id: id,
     fechaFuncion: fechaFuncion,
+    horaFuncion: horaFuncion,
     pelicula_id: pelicula.id,
     sala_id: sala.id,
   });
+
   const handleDelete = () => {
     dispatch(deleteShow(id));
   };
@@ -38,6 +40,7 @@ const ElementShow = ({ data }) => {
     e.preventDefault();
     console.log(newData);
     if (
+      newData.horaFuncion.trim() === "" ||
       newData.fechaFuncion.trim() === "" ||
       String(newData.pelicula_id).trim() === "" ||
       String(newData.sala_id).trim() === ""
@@ -55,6 +58,7 @@ const ElementShow = ({ data }) => {
       <td>{pelicula.name}</td>
       <td>{sala.name}</td>
       <td>{fechaFuncion && transformDateFormat(fechaFuncion)}</td>
+      <td>{horaFuncion}</td>
       <td>
         <button
           className="btn btn-danger me-3"
@@ -166,6 +170,19 @@ const ElementShow = ({ data }) => {
                   type="Date"
                   className="form-control"
                   min={new Date().toISOString().slice(0, 10)}
+                  id="recipient-name"
+                  placeholder="Fecha"
+                />
+              </p>
+            </div>
+            <div className="mb-3">
+              <p>
+                <input
+                  onChange={handleChange}
+                  value={newData.horaFuncion}
+                  name="horaFuncion"
+                  type="Time"
+                  className="form-control"
                   id="recipient-name"
                   placeholder="Fecha"
                 />

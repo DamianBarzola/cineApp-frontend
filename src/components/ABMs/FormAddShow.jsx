@@ -15,11 +15,11 @@ const FormAddShow = () => {
 
   const [show, setShow] = useState({
     fechaFuncion: "",
+    horaFuncion: "",
     pelicula_id: "",
     sala_id: "",
   });
-
-  const { fechaFuncion, pelicula_id, sala_id } = show;
+  const { fechaFuncion, pelicula_id, sala_id, horaFuncion } = show;
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -30,8 +30,10 @@ const FormAddShow = () => {
   };
 
   const handleAdd = (e) => {
+    console.log(show);
     e.preventDefault();
     if (
+      horaFuncion.trim() === "" ||
       fechaFuncion.trim() === "" ||
       pelicula_id.trim() === "" ||
       sala_id.trim() === ""
@@ -42,6 +44,7 @@ const FormAddShow = () => {
       toggle();
       setShow({
         fechaFuncion: "",
+        horaFuncion: "",
         pelicula_id: "",
         sala_id: "",
       });
@@ -131,6 +134,19 @@ const FormAddShow = () => {
                 />
               </p>
             </div>
+            <div className="mb-3">
+              <p>
+                <input
+                  onChange={handleChange}
+                  value={horaFuncion}
+                  name="horaFuncion"
+                  type="Time"
+                  className="form-control"
+                  id="recipient-name"
+                  placeholder="Horario"
+                />
+              </p>
+            </div>
 
             <div className="modal-footer d-flex text-center">
               <button
@@ -140,11 +156,7 @@ const FormAddShow = () => {
               >
                 Cerrar
               </button>
-              <button
-                type="submit"
-                className="btn btn-primary"
-                onClick={handleAdd}
-              >
+              <button className="btn btn-primary" onClick={handleAdd}>
                 Guardar
               </button>
             </div>

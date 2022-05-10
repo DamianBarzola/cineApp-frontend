@@ -12,6 +12,11 @@ export const showReducer = (state = initialState, action) => {
         ...state,
         data: action.payload,
       };
+    case types.listpershowRead:
+      return {
+        ...state,
+        list: action.payload,
+      };
     case types.showModify:
       const indexUpd = state.data.findIndex(
         (show) => show.id === action.payload.id

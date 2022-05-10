@@ -4,21 +4,26 @@ import styles from "../styles/ABMs.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/auth";
 import Spinner from "../components/Spinner";
-import { loadShows, readShows } from "../actions/show";
+import {
+  loadSalesPerShow,
+  loadShows,
+  readSalesPerShow,
+  readShows,
+} from "../actions/show";
 import { transformDateFormat } from "../utils/validations";
 import { Link } from "react-router-dom";
 
 const SalesPerShow = () => {
   const { auth } = useSelector((state) => state);
   const [isLoading, setIsLoading] = useState(true);
-  const shows = useSelector((state) => state.show.data);
+  const sales = useSelector((state) => state.show.list);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     setIsLoading(true);
-    loadShows().then((showData) => {
-      dispatch(readShows(showData));
+    loadSalesPerShow().then((showData) => {
+      dispatch(readSalesPerShow(showData));
       setIsLoading(false);
     });
   }, [dispatch]);
@@ -73,28 +78,32 @@ const SalesPerShow = () => {
                   <h1>Ventas por Función</h1>
                 </div>
               </div>
-              <div className="d-flex justify-content-around align-items-center mt-4">
-                <h3 className="mb-0 ps-md-4">Función: </h3>
-                <select className="form-control" style={{ width: "75%" }}>
-                  {shows &&
-                    shows.map((film, index) => {
-                      return (
-                        <option value={index}>
-                          {film.pelicula.name} - {film.sala.name} -{" "}
-                          {film.fechaFuncion &&
-                            transformDateFormat(film.fechaFuncion)}
-                        </option>
-                      );
-                    })}
-                </select>
-              </div>
-              <div className="d-flex  mt-4  row">
-                <div className="col-md-6">
-                  <h4>Nº de Entradas Vendidas: 0</h4>
-                </div>
-                <div className="col-md-6">
-                  <h4>Ganancias Totales: 0</h4>
-                </div>
+              <div className="d-flex  mt-3 row m-md-5 table-responsive">
+                <table className="table text-light border-dark">
+                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Película</th>
+                      <th>Sala</th>
+                      <th>Fecha</th>
+                      <th>Horario</th>
+                      <th>Entradas Vendidas</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {sales.map((sale, index) => (
+                      <tr key={index}>
+                        <td>{sale[0]}</td>
+                        <td>{sale[1]}</td>
+                        <td>{sale[2]}</td>
+                        <td>{sale[3] && transformDateFormat(sale[3])}</td>
+                        <td>{sale[4]}</td>
+
+                        <td>{sale[5]}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>

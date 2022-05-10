@@ -4,6 +4,7 @@ import { clearFilmData } from "./film";
 import { clearShowData } from "./show";
 import { clearSalaData } from "./sala";
 import { clearButacaData } from "./butaca";
+
 export const emailAndPasslogin = (email, password) => {
   const datos = { email: email, password: password };
   return (dispatch) => {

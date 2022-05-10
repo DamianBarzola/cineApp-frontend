@@ -39,7 +39,7 @@ const Navbar = () => {
         </div>
         <nav className={styles.navbtn}>
           <Link to="/tickets" className={styles.NavBtnLink}>
-            Boleteria Online
+            Boleteria Virtual
           </Link>
         </nav>
       </nav>

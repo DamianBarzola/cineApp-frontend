@@ -3,21 +3,26 @@ import React, { useEffect, useState } from "react";
 import styles from "../styles/ABMs.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/auth";
-import { loadFilmsAll, readFilms } from "../actions/film";
+import {
+  loadFilmsAll,
+  loadSalesPerMovie,
+  readFilms,
+  readSales,
+} from "../actions/film";
 import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
 
 const SalesPerMovie = () => {
+  const sales = useSelector((state) => state.film.list);
   const { auth } = useSelector((state) => state);
   const [isLoading, setIsLoading] = useState(true);
-  const movies = useSelector((state) => state.film.data);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     setIsLoading(true);
-    loadFilmsAll().then((filmData) => {
-      dispatch(readFilms(filmData));
+    loadSalesPerMovie().then((filmData) => {
+      dispatch(readSales(filmData));
       setIsLoading(false);
     });
   }, [dispatch]);
@@ -72,26 +77,25 @@ const SalesPerMovie = () => {
                   <h1>Ventas por Película</h1>
                 </div>
               </div>
-              <div className="d-flex justify-content-around align-items-center mt-4">
-                <h3 className="mb-0 ps-md-4">Película: </h3>
-                <select className="form-control" style={{ width: "75%" }}>
-                  {movies &&
-                    movies.map((film, index) => {
-                      if (film.state === "Cartelera")
-                        return <option value={index}>{film.name}</option>;
-                    })}
-                </select>
-              </div>
-              <div className="d-flex  mt-4  row">
-                <div className="col-md-6">
-                  <h4>Nº de Entradas Vendidas: 0</h4>
-                </div>
-                <div className="col-md-6">
-                  <h4>Ganancias Totales: 0</h4>
-                </div>
+              <div className="d-flex  mt-3 row m-md-4 table-responsive">
+                <table className="table text-light border-dark">
+                  <thead>
+                    <tr>
+                      <th>Película</th>
+                      <th>Entradas Vendidas</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {sales.map((sale, index) => (
+                      <tr key={index}>
+                        <td>{sale[0]}</td>
+                        <td>{sale[1]}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
-            <div></div>
           </div>
         </div>
       </div>

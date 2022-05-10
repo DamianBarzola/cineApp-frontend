@@ -8,6 +8,11 @@ export const loadShows = async () => {
   return result.json();
 };
 
+export const loadSalesPerShow = async () => {
+  const result = await fetch(url + "/reservas/listados/funcion");
+  return result.json();
+};
+
 export const creteShow = (data) => {
   return (dispatch, getstate) => {
     fetch(url + "/funciones/", {
@@ -49,6 +54,13 @@ export const updateShow = (data) => {
 };
 
 /*-------------------------Save Data--------------------------------- */
+export const readSalesPerShow = (data) => {
+  return {
+    type: types.listpershowRead,
+    payload: data,
+  };
+};
+
 export const readShows = (data) => {
   return {
     type: types.showRead,

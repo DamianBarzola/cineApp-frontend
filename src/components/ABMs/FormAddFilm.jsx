@@ -148,11 +148,7 @@ const FormAddFilm = () => {
               >
                 Cerrar
               </button>
-              <button
-                type="submit"
-                className="btn btn-primary"
-                onClick={handleAdd}
-              >
+              <button className="btn btn-primary" onClick={handleAdd}>
                 Guardar
               </button>
             </div>

@@ -1,8 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "../styles/Contact.module.css";
 import { FiMail } from "react-icons/fi";
+import { useDispatch } from "react-redux";
+import { sendContactMsg } from "../actions/extra";
 
 const Contact = () => {
+  const dispatch = useDispatch();
+  const [data, setdata] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const { name, email, subject, message } = data;
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setdata({
+      ...data,
+      [e.target.name]: value,
+    });
+  };
+
+  const handleSend = (e) => {
+    e.preventDefault();
+    if (
+      name.trim() === "" ||
+      subject.trim() === "" ||
+      message.trim() === "" ||
+      email.trim() === ""
+    ) {
+      return alert("Complete los campos");
+    } else {
+      dispatch(sendContactMsg(data));
+      setdata({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    }
+  };
   return (
     <div className={style.container}>
       {" "}
@@ -18,44 +55,53 @@ const Contact = () => {
 
           <input
             className="form-control me-2 mt-3"
+            onChange={handleChange}
+            value={name}
+            name="name"
             type="text"
             placeholder="Nombre Completo"
-            name="nombre"
             minLength="4"
             maxLength="40"
-            pattern="[A-Za-z0-9_-\s]{1,20}"
             required
           />
           <input
             className="form-control me-2 mt-3"
+            onChange={handleChange}
+            value={email}
+            name="email"
             type="email"
             placeholder="Correo Electrónico"
-            name="email"
             minLength="4"
             maxLength="40"
             required
           />
           <input
             className="form-control me-2 mt-3"
+            onChange={handleChange}
+            value={subject}
+            name="subject"
             type="text"
             placeholder="Asunto"
             minLength="1"
             maxLength="40"
-            pattern="[A-Za-z0-9_-\s]{1,20}"
-            name="asunto"
             required
           />
           <textarea
             className="form-control me-2 mt-3 "
+            onChange={handleChange}
+            value={message}
+            name="message"
             placeholder="Mensaje"
             rows="5"
             minLength="1"
             maxLength="500"
-            pattern="[A-Za-z0-9_-\s]{1,20}"
-            name="mensaje"
             required
           ></textarea>
-          <button className={style.btn + " mt-4"} type="submit">
+          <button
+            className={style.btn + " mt-4"}
+            type="submit"
+            onClick={handleSend}
+          >
             Enviar
           </button>
         </form>

@@ -14,6 +14,10 @@ export const transformDateTimeFormat = (datetime) => {
 };
 
 export const transformDateFormat = (date) => {
-  let datePieces = date.split("-");
-  return datePieces[2] + "/" + datePieces[1] + "/" + datePieces[0];
+  try {
+    let datePieces = date.split("-");
+    return datePieces[2] + "/" + datePieces[1] + "/" + datePieces[0];
+  } catch {
+    return "";
+  }
 };

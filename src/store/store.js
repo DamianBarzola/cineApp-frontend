@@ -5,6 +5,7 @@ import { filmReducer } from "../reducers/filmReducer";
 import { showReducer } from "../reducers/showReducer";
 import { salaReducer } from "../reducers/salaReducer";
 import { butacaReducer } from "../reducers/butacaReducer";
+import { ticketSaleReducer } from "../reducers/ticketSaleReducer";
 
 const reducers = combineReducers({
   auth: authReducer,
@@ -12,6 +13,7 @@ const reducers = combineReducers({
   show: showReducer,
   sala: salaReducer,
   butaca: butacaReducer,
+  ticketSale: ticketSaleReducer,
 });
 
 const composeEnhancers =

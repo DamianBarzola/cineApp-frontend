@@ -61,7 +61,7 @@ const ElementFilm = ({ data }) => {
     <>
       <td>{id}</td>
       <td>{name}</td>
-      <td>{description}</td>
+      <td style={{ textAlign: "justify" }}>{description}</td>
       <td>{duration + " min"}</td>
       <td>
         <a href={poster} target="_blank" rel="noopener noreferrer">

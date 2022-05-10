@@ -57,6 +57,7 @@ const TableShow = () => {
                 <th>Pelicula</th>
                 <th>Sala</th>
                 <th>Fecha</th>
+                <th>Horario</th>
                 <th white-space="nowrap" width="1%" colSpan="2">
                   Accion
                 </th>
