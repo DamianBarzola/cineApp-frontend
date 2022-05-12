@@ -1,6 +1,7 @@
 import { types } from "../types/types";
 
 const initialState = {
+  msgError: "",
   data: [],
 };
 export const filmReducer = (state = initialState, action) => {
@@ -40,8 +41,9 @@ export const filmReducer = (state = initialState, action) => {
           return film.id !== action.payload;
         }),
       };
+
     case types.filmClean:
-      return { ...state, data: [] };
+      return { ...state, msgError: "", data: [] };
     default:
       return state;
   }

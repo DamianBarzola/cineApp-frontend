@@ -19,7 +19,6 @@ export const buyTicket = (data) => {
       })
       .catch((e) => {
         dispatch(ticketErrorConnection());
-        alert("Error al conectarse al Servidor");
       });
   };
 };

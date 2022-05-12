@@ -12,6 +12,9 @@ export const creteFilm = (data) => {
       .then((res) => res.json())
       .then((datawithid) => {
         dispatch(create(datawithid));
+      })
+      .catch((error) => {
+        alert("Error al conectarse al servidor");
       });
   };
 };
@@ -24,6 +27,9 @@ export const deleteFilm = (id) => {
       .then((res) => res.json())
       .then((data) => {
         dispatch(deletef(id));
+      })
+      .catch((error) => {
+        alert("Error al conectarse al servidor");
       });
   };
 };
@@ -38,6 +44,9 @@ export const updateFilm = (data) => {
       .then((res) => res.json())
       .then((ResData) => {
         dispatch(update(data));
+      })
+      .catch((error) => {
+        alert("Error al conectarse al servidor");
       });
   };
 };
@@ -98,6 +107,18 @@ export const update = (data) => {
   return {
     type: types.filmModify,
     payload: data,
+  };
+};
+export const msgErrorFilm = (data) => {
+  return {
+    type: types.filmMsgError,
+    payload: data,
+  };
+};
+
+export const filmClearMsgError = () => {
+  return {
+    type: types.filmClearMsgError,
   };
 };
 

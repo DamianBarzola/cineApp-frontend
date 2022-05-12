@@ -12,6 +12,9 @@ export const sendContactMsg = (data) => {
       })
       .then((data) => {
         alert("Mensaje de contacto enviado con exito.");
+      })
+      .catch((error) => {
+        alert("Error al conectarse al servidor");
       });
   };
 };

@@ -29,6 +29,9 @@ export const createSala = (data) => {
         loadSalas().then((salaData) => {
           dispatch(readSalas(salaData));
         });
+      })
+      .catch((error) => {
+        alert("Error al conectarse al servidor");
       });
   };
 };
@@ -41,6 +44,9 @@ export const deleteSala = (id) => {
       // .then((res) => res.json())
       .then((data) => {
         dispatch(deleteSalaData(id));
+      })
+      .catch((error) => {
+        alert("Error al conectarse al servidor");
       });
   };
 };
@@ -55,6 +61,9 @@ export const updateSala = (data) => {
       .then((res) => res.json())
       .then((ResData) => {
         dispatch(updateSalaData(data));
+      })
+      .catch((error) => {
+        alert("Error al conectarse al servidor");
       });
   };
 };

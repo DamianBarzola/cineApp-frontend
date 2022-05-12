@@ -23,6 +23,9 @@ export const creteShow = (data) => {
       .then((res) => res.json())
       .then((datawithid) => {
         dispatch(createShowData(datawithid));
+      })
+      .catch((error) => {
+        alert("Error al conectarse al servidor");
       });
   };
 };
@@ -35,6 +38,9 @@ export const deleteShow = (id) => {
       // .then((res) => res.json())
       .then((data) => {
         dispatch(deleteShowData(id));
+      })
+      .catch((error) => {
+        alert("Error al conectarse al servidor");
       });
   };
 };
@@ -49,6 +55,9 @@ export const updateShow = (data) => {
       .then((res) => res.json())
       .then((ResData) => {
         dispatch(updateShowData(ResData));
+      })
+      .catch((error) => {
+        alert("Error al conectarse al servidor");
       });
   };
 };

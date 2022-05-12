@@ -19,6 +19,9 @@ export const creteButaca = (data) => {
       .then((res) => res.json())
       .then((datawithid) => {
         dispatch(createButacaData(datawithid));
+      })
+      .catch((error) => {
+        alert("Error al conectarse al servidor");
       });
   };
 };
@@ -33,6 +36,9 @@ export const deleteButaca = (id) => {
         loadSalas().then((salaData) => {
           dispatch(readSalas(salaData));
         });
+      })
+      .catch((error) => {
+        alert("Error al conectarse al servidor");
       });
   };
 };
@@ -49,6 +55,9 @@ export const updateButaca = (data) => {
         loadSalas().then((salaData) => {
           dispatch(readSalas(salaData));
         });
+      })
+      .catch((error) => {
+        alert("Error al conectarse al servidor");
       });
   };
 };
