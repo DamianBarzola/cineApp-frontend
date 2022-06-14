@@ -21,6 +21,7 @@ import SalesPerMovie from "../pages/SalesPerMovie";
 import SaleSuccess from "../pages/SaleSuccess";
 import CancelSale from "../pages/CancelSale";
 import TicketCancelSuccess from "../pages/TicketCancelSuccess";
+import TicketInfoPerShow from "../pages/TicketInfoPerShow";
 
 const AppRouter = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,11 @@ const AppRouter = () => {
             <PrivateRouter exact path="/abm" log={log} component={ABMs} />
             <Route exact path="/salespershow" component={SalesPerShow} />
             <Route exact path="/salespermovie" component={SalesPerMovie} />
+            <Route
+              exact
+              path="/ticketsInfo/:id"
+              component={TicketInfoPerShow}
+            />
             <Route exact path="/movies/:movieId" component={MovieDetails} />
             <Route exact path="/movies" component={Movies} />
             <Route exact path="/comingsoon" component={ComingSoon} />

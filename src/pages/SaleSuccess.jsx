@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 import style from "../styles/Contact.module.css";
 import { transformDateFormat } from "../utils/validations";
 import { Redirect } from "react-router-dom";
-import { clearTicketData } from "../actions/reservas";
+import { clearTicketData } from "../actions/ticketSale";
 
 const SaleSuccess = () => {
   const data = useSelector((state) => state.ticketSale.data);
   const dispatch = useDispatch();
-
+  console.log(data);
   if (!data) {
     return <Redirect to="/tickets" />;
   }

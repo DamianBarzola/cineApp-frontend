@@ -34,4 +34,10 @@ export const types = {
   ticketSaleErrorConnection: `[TicketSale] errorConnection`,
   ticketSaleClean: `[TicketSale] clean`,
   ticketSaleCancel: `[TicketSale] cancel`,
+
+  reservaClearMsgError: "[Reserva] ClearMsgError",
+  reservaClean: "[Reserva] Clean",
+  reservaMsgError: "[Reserva] MsgError",
+  reservaDelete: "[Reserva] Delete",
+  reservaRead: "[Reserva] Read",
 };

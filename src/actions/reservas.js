@@ -1,82 +1,57 @@
-import { url } from "../types/config";
 import { types } from "../types/types";
+import { url } from "../types/config";
 
-export const buyTicket = (data) => {
+export const deleteReserva = (id) => {
   return (dispatch) => {
-    fetch(url + "/reservas/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+    fetch(url + "/peliculas/" + id, {
+      method: "DELETE",
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.paymentMsg) {
-          dispatch(ticketRefusedPayment());
-        } else {
-          console.log(data);
-          dispatch(ticketSuccess(data));
-        }
+        dispatch(deleteRes(id));
       })
-      .catch((e) => {
-        dispatch(ticketErrorConnection());
+      .catch((error) => {
+        alert("Error al conectarse al servidor");
       });
   };
 };
 
-export const deleteTicketSale = (data) => {
-  return (dispatch) => {
-    fetch(url + "/reservas/", {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.message === "Entrada no encontrada") {
-          dispatch(ticketCancel({ situation: 2, message: data.message }));
-        } else {
-          dispatch(ticketCancel({ situation: 1, message: data.message }));
-        }
-      })
-      .catch((e) =>
-        dispatch(ticketCancel({ situation: 3, message: "Error de conexion" }))
-      );
-  };
+export const loadReservas = async (id) => {
+  const result = await fetch(url + "/reservas/all/" + id);
+  return result.json();
 };
 
 /*-------------------------Save Data--------------------------------- */
 
-export const clearTicketData = () => {
+export const readreservas = (data) => {
   return {
-    type: types.ticketSaleClean,
-  };
-};
-
-export const ticketSuccess = (data) => {
-  return {
-    type: types.ticketSaleSuccess,
-    payload: data,
-  };
-};
-export const ticketRefusedPayment = () => {
-  return {
-    type: types.ticketSaleRefused,
-    payload: "Información de pago no válida.",
-  };
-};
-export const ticketErrorConnection = () => {
-  return {
-    type: types.ticketSaleErrorConnection,
-    payload: "Error al conecta a la base de datos.",
-  };
-};
-
-export const ticketCancel = (data) => {
-  return {
-    type: types.ticketSaleCancel,
+    type: types.reservaRead,
     payload: data,
   };
 };
 
-//cinejava99@gmail.com
-//tpcinejava
+export const deleteRes = (id) => {
+  return {
+    type: types.reservaDelete,
+    payload: id,
+  };
+};
+
+export const msgErrorreserva = (data) => {
+  return {
+    type: types.reservaMsgError,
+    payload: data,
+  };
+};
+
+export const reservaClearMsgError = () => {
+  return {
+    type: types.reservaClearMsgError,
+  };
+};
+
+export const clearreservaData = () => {
+  return {
+    type: types.reservaClean,
+  };
+};

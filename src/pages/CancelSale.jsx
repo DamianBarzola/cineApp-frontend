@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import style from "../styles/Contact.module.css";
 import { FaExclamationCircle } from "react-icons/fa";
-import { clearTicketData, deleteTicketSale } from "../actions/reservas";
+import { clearTicketData, deleteTicketSale } from "../actions/ticketSale";
 import { Redirect } from "react-router-dom";
 
 const CancelSale = () => {

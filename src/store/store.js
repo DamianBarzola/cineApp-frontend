@@ -6,6 +6,7 @@ import { showReducer } from "../reducers/showReducer";
 import { salaReducer } from "../reducers/salaReducer";
 import { butacaReducer } from "../reducers/butacaReducer";
 import { ticketSaleReducer } from "../reducers/ticketSaleReducer";
+import { reservaReducer } from "../reducers/reservaReducer";
 
 const reducers = combineReducers({
   auth: authReducer,
@@ -13,6 +14,7 @@ const reducers = combineReducers({
   show: showReducer,
   sala: salaReducer,
   butaca: butacaReducer,
+  reserva: reservaReducer,
   ticketSale: ticketSaleReducer,
 });
 

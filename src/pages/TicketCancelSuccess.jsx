@@ -4,7 +4,7 @@ import "react-credit-cards/es/styles-compiled.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import style from "../styles/Contact.module.css";
-import { clearTicketData } from "../actions/reservas";
+import { clearTicketData } from "../actions/ticketSale";
 import { Redirect } from "react-router-dom";
 
 const TicketCancelSuccess = () => {

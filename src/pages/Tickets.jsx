@@ -11,7 +11,7 @@ import {
   formatNumberCard,
 } from "../utils/cardUtils";
 import { useDispatch, useSelector } from "react-redux";
-import { buyTicket, clearTicketData } from "../actions/reservas";
+import { buyTicket, clearTicketData } from "../actions/ticketSale";
 import { FaExclamationCircle } from "react-icons/fa";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import { Link } from "react-router-dom";

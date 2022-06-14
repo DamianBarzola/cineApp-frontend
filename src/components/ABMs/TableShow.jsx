@@ -58,7 +58,7 @@ const TableShow = () => {
                 <th>Sala</th>
                 <th>Fecha</th>
                 <th>Horario</th>
-                <th white-space="nowrap" width="1%" colSpan="2">
+                <th white-space="nowrap" width="1%" colSpan="3">
                   Accion
                 </th>
               </tr>
