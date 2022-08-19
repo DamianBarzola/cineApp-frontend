@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Spinner } from "reactstrap";
+import Spinner from "../Spinner";
 import { loadSalas, readSalas } from "../../actions/sala";
 import ConectionLost from "../MsgPages/ConectionLost";
 import ElementSala from "./ElementSala";

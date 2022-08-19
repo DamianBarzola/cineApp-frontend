@@ -1,13 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadSalas, readSalas } from "../../actions/sala";
+import ConectionLost from "../MsgPages/ConectionLost";
+import Spinner from "../Spinner";
 import ElementButaca from "./ElementButaca";
-import FormAddButaca from "./FormAddButaca";
 
 const TableButaca = () => {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
   const salas = useSelector((state) => state.sala.data);
   const [sala, setSala] = useState(0);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    loadSalas()
+      .then((salaData) => {
+        dispatch(readSalas(salaData));
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+        setError(true);
+      });
+  }, [dispatch]);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -22,6 +38,13 @@ const TableButaca = () => {
       return obj[0].butaca;
     }
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+  if (error) {
+    return <ConectionLost />;
+  }
   return (
     <div>
       <div className="container col-md-11  ">

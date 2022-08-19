@@ -70,7 +70,7 @@ const SalesPerShow = () => {
             <div>
               <div className="d-flex row align-items-center">
                 <div className="col-md-2">
-                  <Link to="/abm" className="btn btn-secondary">
+                  <Link to="/shows" className="btn btn-secondary">
                     Volver
                   </Link>
                 </div>

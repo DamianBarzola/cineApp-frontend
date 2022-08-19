@@ -31,9 +31,16 @@ table{
   padding: 10px 20px;
   transition: all 0.35s ease;        
   border-radius: 4px;
+  background: white;
+}
+.tabsTriggerSelected:hover{
+  opacity: 0.75;
+  color: white;
+
 }
 .tabsTrigger:hover{
-  opacity: 0.8;
+  opacity: 0.75;
+  color: black;
 
 }
 

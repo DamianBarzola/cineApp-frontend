@@ -22,6 +22,10 @@ import SaleSuccess from "../pages/SaleSuccess";
 import CancelSale from "../pages/CancelSale";
 import TicketCancelSuccess from "../pages/TicketCancelSuccess";
 import TicketInfoPerShow from "../pages/TicketInfoPerShow";
+import Shows from "../pages/Shows";
+import Salas from "../pages/Salas";
+import Films from "../pages/Films";
+import Butacas from "../pages/Butacas";
 
 const AppRouter = () => {
   const dispatch = useDispatch();
@@ -46,6 +50,10 @@ const AppRouter = () => {
           <Switch>
             <PublicRouter exact path="/login" log={log} component={Login} />
             <PrivateRouter exact path="/abm" log={log} component={ABMs} />
+            <Route exact path="/films" component={Films} />
+            <Route exact path="/salas" component={Salas} />
+            <Route exact path="/butacas" component={Butacas} />
+            <Route exact path="/shows" component={Shows} />
             <Route exact path="/salespershow" component={SalesPerShow} />
             <Route exact path="/salespermovie" component={SalesPerMovie} />
             <Route
@@ -55,6 +63,7 @@ const AppRouter = () => {
             />
             <Route exact path="/movies/:movieId" component={MovieDetails} />
             <Route exact path="/movies" component={Movies} />
+
             <Route exact path="/comingsoon" component={ComingSoon} />
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/tickets" component={Tickets} />

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Spinner } from "reactstrap";
+import Spinner from "../Spinner";
 import { loadShows, readShows } from "../../actions/show";
+import { loadSalas, readSalas } from "../../actions/sala";
+import { loadFilmsAll, readFilms } from "../../actions/film";
 import ConectionLost from "../MsgPages/ConectionLost";
 import ElementShow from "./ElementShow";
 import FormAddShow from "./FormAddShow";
@@ -16,6 +18,22 @@ const TableShow = () => {
 
   useEffect(() => {
     setIsLoading(true);
+    loadFilmsAll()
+      .then((filmData) => {
+        dispatch(readFilms(filmData));
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setError(true);
+      });
+    loadSalas()
+      .then((salaData) => {
+        dispatch(readSalas(salaData));
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setError(true);
+      });
     loadShows()
       .then((showData) => {
         dispatch(readShows(showData));

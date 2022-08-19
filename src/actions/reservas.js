@@ -2,18 +2,17 @@ import { types } from "../types/types";
 import { url } from "../types/config";
 
 export const deleteReserva = (id) => {
-  return (dispatch) => {
-    fetch(url + "/peliculas/" + id, {
-      method: "DELETE",
+  fetch(url + "/reservas/" + id, {
+    method: "DELETE",
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      alert("Reserva borrada con exito");
     })
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch(deleteRes(id));
-      })
-      .catch((error) => {
-        alert("Error al conectarse al servidor");
-      });
-  };
+    .catch((error) => {
+      alert("Error al conectarse al servidor");
+    });
 };
 
 export const loadReservas = async (id) => {

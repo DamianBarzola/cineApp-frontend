@@ -21,20 +21,14 @@ const TicketInfoPerShow = () => {
   const [modalDelete, setModalDelete] = useState(false);
   const toggleDeleteRes = () => setModalDelete(!modalDelete);
   const handleDelete = () => {
-    deleteReserva(iddelete)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        alert(error);
-      });
+    console.log(iddelete);
+    deleteReserva(iddelete);
   };
 
   useEffect(() => {
     setIsLoading(true);
     loadReservas(id).then((data) => {
       setIsLoading(false);
-      console.log(reservas);
       dispatch(readreservas(data));
     });
   }, [dispatch]);
@@ -81,7 +75,7 @@ const TicketInfoPerShow = () => {
             <div>
               <div className="d-flex row align-items-center">
                 <div className="col-md-2">
-                  <Link to="/abm" className="btn btn-secondary">
+                  <Link to="/shows" className="btn btn-secondary">
                     Volver
                   </Link>
                 </div>
@@ -106,23 +100,22 @@ const TicketInfoPerShow = () => {
                     <tbody>
                       {reservas.map((reserva, index) => (
                         <tr key={index}>
-                          <td>{reserva.id}</td>
+                          <td>{reserva[0]}</td>
                           <td>
-                            {reserva.fechaCompra &&
-                              transformDateFormat(reserva.fechaCompra)}
+                            {reserva[3] && transformDateFormat(reserva[3])}
                           </td>
-                          <td>{reserva.email}</td>
+                          <td>{reserva[2]}</td>
                           <td>
                             {"Fila: " +
-                              reserva.butaca.position_x +
+                              reserva[4].position_x +
                               " Columna: " +
-                              reserva.butaca.position_y}
+                              reserva[4].position_y}
                           </td>
                           <td>
                             <button
                               className="btn btn-danger me-1"
                               onClick={() => {
-                                setIddelete(reserva.id);
+                                setIddelete(reserva[0]);
                                 toggleDeleteRes();
                               }}
                               type="button"
