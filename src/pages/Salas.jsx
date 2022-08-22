@@ -3,8 +3,10 @@ import styles from "../styles/ABMs.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/auth";
 
+import { ToastContainer } from "react-toastify";
 import { Link } from "react-router-dom";
 import TableSala from "../components/ABMs/TableSala";
+import { Redirect } from "react-router-dom";
 
 const Salas = () => {
   const { auth } = useSelector((state) => state);
@@ -49,7 +51,17 @@ const Salas = () => {
               </button>
             </div>
           </div>
-          <hr />
+          <hr /><ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
           <div className="bg-dark pt-1">
             {" "}
             <div className="tabs ">

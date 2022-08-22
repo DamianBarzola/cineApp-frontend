@@ -4,6 +4,8 @@ import styles from "../styles/ABMs.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/auth";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { Redirect } from "react-router-dom";
 
 const Films = () => {
   const { auth } = useSelector((state) => state);
@@ -19,6 +21,7 @@ const Films = () => {
     window.location.reload(); //ver para cambiar
     // JSON.parse(localStorage.removeItem("user"));
   };
+
 
   return (
     <div className="container">
@@ -49,6 +52,17 @@ const Films = () => {
             </div>
           </div>
           <hr />
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <div className="bg-dark pt-1">
             {" "}
             <div className="tabs ">

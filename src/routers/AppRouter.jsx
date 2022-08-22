@@ -49,13 +49,31 @@ const AppRouter = () => {
         <main>
           <Switch>
             <PublicRouter exact path="/login" log={log} component={Login} />
-            <PrivateRouter exact path="/abm" log={log} component={ABMs} />
-            <Route exact path="/films" component={Films} />
+            {/* <PrivateRouter exact path="/abm" log={log} component={ABMs} /> */}
+            <Route exact path="/shows">
+              {!log ? <Redirect to="/login" /> : <Shows />}
+            </Route>
+            <Route exact path="/films">
+              {!log ? <Redirect to="/login" /> : <Films />}
+            </Route>
+            <Route exact path="/salas">
+              {!log ? <Redirect to="/login" /> : <Salas />}
+            </Route>
+            <Route exact path="/butacas">
+              {!log ? <Redirect to="/login" /> : <Butacas />}
+            </Route>
+            <Route exact path="/salespershow">
+              {!log ? <Redirect to="/login" /> : <SalesPerShow />}
+            </Route>
+            <Route exact path="/salespermovie">
+              {!log ? <Redirect to="/login" /> : <SalesPerMovie />}
+            </Route>
+            {/* <Route exact path="/films" component={Films} />
             <Route exact path="/salas" component={Salas} />
             <Route exact path="/butacas" component={Butacas} />
-            <Route exact path="/shows" component={Shows} />
-            <Route exact path="/salespershow" component={SalesPerShow} />
-            <Route exact path="/salespermovie" component={SalesPerMovie} />
+           <Route exact path="/shows" component={Shows} />  */}
+            {/* <Route exact path="/salespershow" component={SalesPerShow} />
+            <Route exact path="/salespermovie" component={SalesPerMovie} /> */}
             <Route
               exact
               path="/ticketsInfo/:id"

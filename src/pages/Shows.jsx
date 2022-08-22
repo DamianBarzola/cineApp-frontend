@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/auth";
 
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import TableShow from "../components/ABMs/TableShow";
+import { Redirect } from "react-router-dom";
 
 const Shows = () => {
   const { auth } = useSelector((state) => state);
@@ -49,7 +51,18 @@ const Shows = () => {
               </button>
             </div>
           </div>
-          <hr />
+          <hr />{" "}
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <div className="bg-dark pt-1">
             {" "}
             <div className="tabs ">
