@@ -12,8 +12,9 @@ import {
 } from "../actions/show";
 import { transformDateFormat } from "../utils/validations";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
-const SalesPerShow = () => {
+const SalesPerShow = ({ handleLogOut }) => {
   const { auth } = useSelector((state) => state);
   const [isLoading, setIsLoading] = useState(true);
   const sales = useSelector((state) => state.show.list);
@@ -31,11 +32,6 @@ const SalesPerShow = () => {
   if (isLoading) {
     return <Spinner />;
   }
-
-  const handleLogOut = () => {
-    dispatch(logout());
-    window.location.reload(); //ver para cambiar
-  };
 
   return (
     <div className="container">
@@ -65,7 +61,18 @@ const SalesPerShow = () => {
               </button>
             </div>
           </div>
-          <hr />
+          <hr />{" "}
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <div className="bg-dark pt-1">
             <div>
               <div className="d-flex row align-items-center">

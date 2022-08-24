@@ -1,5 +1,6 @@
 import { url } from "../types/config";
 import { types } from "../types/types";
+import { toast } from "react-toastify";
 
 export const buyTicket = (data) => {
   return (dispatch) => {
@@ -8,7 +9,9 @@ export const buyTicket = (data) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        return res.json();
+      })
       .then((data) => {
         if (data.paymentMsg) {
           dispatch(ticketRefusedPayment());
@@ -30,7 +33,9 @@ export const deleteTicketSale = (data) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        return res.json();
+      })
       .then((data) => {
         if (data.message === "Entrada no encontrada") {
           dispatch(ticketCancel({ situation: 2, message: data.message }));

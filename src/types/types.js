@@ -21,6 +21,7 @@ export const types = {
   salaDelete: `[Sala] delete`,
   salaRead: `[Sala] read`,
   salaModify: `[Sala] modify`,
+  salaMaintenance: `[Sala] Maintenance`,
   salaClean: `[Sala] clean`,
 
   butacaAdd: `[Butaca] add`,

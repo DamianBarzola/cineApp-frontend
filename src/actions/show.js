@@ -1,5 +1,6 @@
 import { types } from "../types/types";
 import { url } from "../types/config";
+import { toast } from "react-toastify";
 
 export const loadShows = async () => {
   const result = await fetch(url + "/funciones/", {
@@ -20,12 +21,25 @@ export const creteShow = (data) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error('error');
+      })
       .then((datawithid) => {
         dispatch(createShowData(datawithid));
       })
       .catch((error) => {
-        alert("Error al conectarse al servidor");
+        toast.error('Error al conectarse al servidor', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
 };
@@ -35,12 +49,25 @@ export const deleteShow = (id) => {
     fetch(url + "/funciones/" + id, {
       method: "DELETE",
     })
-      // .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error('error');
+      })
       .then((data) => {
         dispatch(deleteShowData(id));
       })
       .catch((error) => {
-        alert("Error al conectarse al servidor");
+        toast.error('Error al conectarse al servidor', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
 };
@@ -52,12 +79,25 @@ export const updateShow = (data) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error('error');
+      })
       .then((ResData) => {
         dispatch(updateShowData(ResData));
       })
       .catch((error) => {
-        alert("Error al conectarse al servidor");
+        toast.error('Error al conectarse al servidor', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
 };

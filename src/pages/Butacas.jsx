@@ -8,20 +8,8 @@ import { ToastContainer } from "react-toastify";
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 
-const Butacas = () => {
+const Butacas = ({ handleLogOut }) => {
   const { auth } = useSelector((state) => state);
-
-  const dispatch = useDispatch();
-
-  const handleLogOut = () => {
-    dispatch(logout());
-    // dispatch(clearFilmData());
-    // dispatch(clearShowData());
-    // dispatch(clearSalaData());
-    // dispatch(clearButacaData());
-    window.location.reload(); //ver para cambiar
-    // JSON.parse(localStorage.removeItem("user"));
-  };
 
   return (
     <div className="container">
@@ -53,16 +41,16 @@ const Butacas = () => {
           </div>
           <hr />
           <ToastContainer
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <div className="bg-dark pt-1">
             {" "}
             <div className="tabs ">

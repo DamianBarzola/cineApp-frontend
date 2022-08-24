@@ -8,20 +8,8 @@ import { ToastContainer } from "react-toastify";
 import TableShow from "../components/ABMs/TableShow";
 import { Redirect } from "react-router-dom";
 
-const Shows = () => {
+const Shows = ({ handleLogOut }) => {
   const { auth } = useSelector((state) => state);
-
-  const dispatch = useDispatch();
-
-  const handleLogOut = () => {
-    dispatch(logout());
-    // dispatch(clearFilmData());
-    // dispatch(clearShowData());
-    // dispatch(clearSalaData());
-    // dispatch(clearButacaData());
-    window.location.reload(); //ver para cambiar
-    // JSON.parse(localStorage.removeItem("user"));
-  };
 
   return (
     <div className="container">

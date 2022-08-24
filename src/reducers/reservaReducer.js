@@ -15,7 +15,7 @@ export const reservaReducer = (state = initialState, action) => {
       return {
         ...state,
         data: state.data.filter((reserva) => {
-          return reserva.id !== action.payload;
+          return reserva[0] !== action.payload;
         }),
       };
 

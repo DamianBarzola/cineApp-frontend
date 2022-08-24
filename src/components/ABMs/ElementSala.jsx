@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
-import { deleteSala, updateSala } from "../../actions/sala.js";
+import {
+  deleteSala,
+  setMaintenanceSala,
+  updateSala,
+} from "../../actions/sala.js";
+import { GrVmMaintenance } from "react-icons/gr";
+import { FaWrench } from "react-icons/fa";
 
 const ElementSala = ({ data }) => {
   const dispatch = useDispatch();
@@ -10,11 +16,25 @@ const ElementSala = ({ data }) => {
 
   const [modalDelete, setModalDelete] = useState(false);
   const toggleDelete = () => setModalDelete(!modalDelete);
+  const [modalMaintenance, setModalMaintenance] = useState(false);
+  const toggleMaintenance = () => setModalMaintenance(!modalMaintenance);
 
   const { id, name, state, number_column, number_row } = data;
 
   const handleDelete = () => {
     dispatch(deleteSala(id));
+  };
+  const handleMaintenance = () => {
+    dispatch(
+      setMaintenanceSala({
+        id: id,
+        name: name,
+        number_column: number_column,
+        number_row: number_row,
+        state: 0,
+      })
+    );
+    setModalMaintenance(false);
   };
 
   const [newData, setNewData] = useState({
@@ -54,7 +74,7 @@ const ElementSala = ({ data }) => {
       </td>
       <td>
         <button
-          className="btn btn-danger me-3"
+          className="btn btn-danger "
           onClick={toggleDelete}
           type="button"
         >
@@ -87,6 +107,16 @@ const ElementSala = ({ data }) => {
           >
             <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
           </svg>
+        </button>
+      </td>
+      <td>
+        {" "}
+        <button
+          className="btn btn-info"
+          onClick={toggleMaintenance}
+          type="button"
+        >
+          <FaWrench />
         </button>
       </td>
 
@@ -151,6 +181,7 @@ const ElementSala = ({ data }) => {
                 name="state"
                 className="form-select"
                 aria-label="Estado"
+                disabled
               >
                 <option value={true}>Disponible</option>
                 <option value={false}>No Disponible</option>
@@ -189,6 +220,41 @@ const ElementSala = ({ data }) => {
             type="button"
             className="btn btn-primary"
             onClick={handleDelete}
+          >
+            Aceptar
+          </button>
+        </div>
+      </Modal>
+
+      <Modal
+        isOpen={modalMaintenance}
+        toggle={toggleMaintenance}
+        className="modalcss"
+      >
+        <ModalHeader className="text-dark" toggle={toggleMaintenance}>
+          Estas seguro que poner esta sala en mantenimiento?
+        </ModalHeader>
+        <ModalBody className="text-dark">
+          <p>
+            Si pones la sala en mantenimiento se cancelaran todas las funciones.
+          </p>
+          <p>
+            Se notificará a todos los usuarios que hayan comprado un ticket para
+            las funciones correspondientes
+          </p>
+        </ModalBody>
+        <div className="modal-footer">
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={toggleMaintenance}
+          >
+            Cancelar
+          </button>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={handleMaintenance}
           >
             Aceptar
           </button>

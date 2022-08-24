@@ -8,20 +8,8 @@ import { Link } from "react-router-dom";
 import TableSala from "../components/ABMs/TableSala";
 import { Redirect } from "react-router-dom";
 
-const Salas = () => {
+const Salas = ({ handleLogOut }) => {
   const { auth } = useSelector((state) => state);
-
-  const dispatch = useDispatch();
-
-  const handleLogOut = () => {
-    dispatch(logout());
-    // dispatch(clearFilmData());
-    // dispatch(clearShowData());
-    // dispatch(clearSalaData());
-    // dispatch(clearButacaData());
-    window.location.reload(); //ver para cambiar
-    // JSON.parse(localStorage.removeItem("user"));
-  };
 
   return (
     <div className="container">
@@ -51,17 +39,18 @@ const Salas = () => {
               </button>
             </div>
           </div>
-          <hr /><ToastContainer
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
+          <hr />
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <div className="bg-dark pt-1">
             {" "}
             <div className="tabs ">

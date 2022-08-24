@@ -30,6 +30,7 @@ import Butacas from "../pages/Butacas";
 const AppRouter = () => {
   const dispatch = useDispatch();
   const [log, setlog] = useState(false);
+
   useEffect(() => {
     let user = JSON.parse(localStorage.getItem("user"));
     if (!(user == null)) {
@@ -40,6 +41,12 @@ const AppRouter = () => {
       setlog(false);
     }
   }, [dispatch, log]);
+
+  const handleLogOut = () => {
+    dispatch(logout());
+    localStorage.removeItem("user");
+    setlog(false);
+  };
   return (
     <div>
       <Router>
@@ -51,34 +58,55 @@ const AppRouter = () => {
             <PublicRouter exact path="/login" log={log} component={Login} />
             {/* <PrivateRouter exact path="/abm" log={log} component={ABMs} /> */}
             <Route exact path="/shows">
-              {!log ? <Redirect to="/login" /> : <Shows />}
+              {!log ? (
+                <Redirect to="/login" />
+              ) : (
+                <Shows handleLogOut={handleLogOut} />
+              )}
             </Route>
             <Route exact path="/films">
-              {!log ? <Redirect to="/login" /> : <Films />}
+              {!log ? (
+                <Redirect to="/login" />
+              ) : (
+                <Films handleLogOut={handleLogOut} />
+              )}
             </Route>
             <Route exact path="/salas">
-              {!log ? <Redirect to="/login" /> : <Salas />}
+              {!log ? (
+                <Redirect to="/login" />
+              ) : (
+                <Salas handleLogOut={handleLogOut} />
+              )}
             </Route>
             <Route exact path="/butacas">
-              {!log ? <Redirect to="/login" /> : <Butacas />}
+              {!log ? (
+                <Redirect to="/login" />
+              ) : (
+                <Butacas handleLogOut={handleLogOut} />
+              )}
             </Route>
             <Route exact path="/salespershow">
-              {!log ? <Redirect to="/login" /> : <SalesPerShow />}
+              {!log ? (
+                <Redirect to="/login" />
+              ) : (
+                <SalesPerShow handleLogOut={handleLogOut} />
+              )}
             </Route>
             <Route exact path="/salespermovie">
-              {!log ? <Redirect to="/login" /> : <SalesPerMovie />}
+              {!log ? (
+                <Redirect to="/login" />
+              ) : (
+                <SalesPerMovie handleLogOut={handleLogOut} />
+              )}
             </Route>
-            {/* <Route exact path="/films" component={Films} />
-            <Route exact path="/salas" component={Salas} />
-            <Route exact path="/butacas" component={Butacas} />
-           <Route exact path="/shows" component={Shows} />  */}
-            {/* <Route exact path="/salespershow" component={SalesPerShow} />
-            <Route exact path="/salespermovie" component={SalesPerMovie} /> */}
-            <Route
-              exact
-              path="/ticketsInfo/:id"
-              component={TicketInfoPerShow}
-            />
+            <Route exact path="/ticketsInfo/:id">
+              {!log ? (
+                <Redirect to="/login" />
+              ) : (
+                <TicketInfoPerShow handleLogOut={handleLogOut} />
+              )}
+            </Route>
+
             <Route exact path="/movies/:movieId" component={MovieDetails} />
             <Route exact path="/movies" component={Movies} />
 

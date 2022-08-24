@@ -6,7 +6,7 @@ const PublicRouter = ({ log, component: Component, ...resto }) => {
     <Route
       {...resto}
       component={(props) =>
-        log ? <Redirect to="/abm" /> : <Component {...props} />
+        log ? <Redirect to="/films" /> : <Component {...props} />
       }
     />
   );

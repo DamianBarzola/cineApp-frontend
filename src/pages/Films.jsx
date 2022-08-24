@@ -1,27 +1,14 @@
 import React from "react";
 import TableFilm from "../components/ABMs/TableFilm";
 import styles from "../styles/ABMs.module.css";
+import "../styles/ABMs.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/auth";
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { Redirect } from "react-router-dom";
 
-const Films = () => {
+const Films = ({ handleLogOut }) => {
   const { auth } = useSelector((state) => state);
-
-  const dispatch = useDispatch();
-
-  const handleLogOut = () => {
-    dispatch(logout());
-    // dispatch(clearFilmData());
-    // dispatch(clearShowData());
-    // dispatch(clearSalaData());
-    // dispatch(clearButacaData());
-    window.location.reload(); //ver para cambiar
-    // JSON.parse(localStorage.removeItem("user"));
-  };
-
 
   return (
     <div className="container">
@@ -50,19 +37,9 @@ const Films = () => {
                 Cerrar Sesion
               </button>
             </div>
+            <ToastContainer position="top-center" autoClose={5000} />
           </div>
           <hr />
-          <ToastContainer
-            position="top-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
           <div className="bg-dark pt-1">
             {" "}
             <div className="tabs ">

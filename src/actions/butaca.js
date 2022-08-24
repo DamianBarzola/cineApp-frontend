@@ -1,6 +1,7 @@
 import { types } from "../types/types";
 import { url } from "../types/config";
 import { loadSalas, readSalas } from "./sala";
+import { toast } from "react-toastify";
 
 export const loadButacas = async () => {
   const result = await fetch(url + "/butacas/", {
@@ -16,12 +17,25 @@ export const creteButaca = (data) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error('error');
+      })
       .then((datawithid) => {
         dispatch(createButacaData(datawithid));
       })
       .catch((error) => {
-        alert("Error al conectarse al servidor");
+        toast.error('Error al conectarse al servidor', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
 };
@@ -38,7 +52,15 @@ export const deleteButaca = (id) => {
         });
       })
       .catch((error) => {
-        alert("Error al conectarse al servidor");
+        toast.error('Error al conectarse al servidor', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
 };
@@ -57,7 +79,15 @@ export const updateButaca = (data) => {
         });
       })
       .catch((error) => {
-        alert("Error al conectarse al servidor");
+        toast.error('Error al conectarse al servidor', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
 };

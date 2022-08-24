@@ -10,7 +10,7 @@ import { useParams } from "react-router";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import { deleteReserva, loadReservas, readreservas } from "../actions/reservas";
 
-const TicketInfoPerShow = () => {
+const TicketInfoPerShow = ({ handleLogOut }) => {
   const dispatch = useDispatch();
   const { auth } = useSelector((state) => state);
   const [isLoading, setIsLoading] = useState(true);
@@ -21,8 +21,8 @@ const TicketInfoPerShow = () => {
   const [modalDelete, setModalDelete] = useState(false);
   const toggleDeleteRes = () => setModalDelete(!modalDelete);
   const handleDelete = () => {
-    console.log(iddelete);
-    deleteReserva(iddelete);
+    dispatch(deleteReserva(iddelete));
+    setModalDelete(false);
   };
 
   useEffect(() => {
@@ -36,11 +36,6 @@ const TicketInfoPerShow = () => {
   if (isLoading) {
     return <Spinner />;
   }
-
-  const handleLogOut = () => {
-    dispatch(logout());
-    window.location.reload(); //ver para cambiar
-  };
 
   return (
     <div className="container">

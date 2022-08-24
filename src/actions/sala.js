@@ -7,6 +7,7 @@
 
 import { types } from "../types/types";
 import { url } from "../types/config";
+import { toast } from "react-toastify";
 
 export const loadSalas = async () => {
   const result = await fetch(url + "/salas/", {
@@ -22,7 +23,12 @@ export const createSala = (data) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error('error');
+      })
       .then((datawithid) => {
         // console.log(datawithid);
         // dispatch(createSalaData(datawithid));
@@ -31,7 +37,15 @@ export const createSala = (data) => {
         });
       })
       .catch((error) => {
-        alert("Error al conectarse al servidor");
+        toast.error('Error al conectarse al servidor', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
 };
@@ -41,12 +55,25 @@ export const deleteSala = (id) => {
     fetch(url + "/salas/" + id, {
       method: "DELETE",
     })
-      // .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error('error');
+      })
       .then((data) => {
         dispatch(deleteSalaData(id));
       })
       .catch((error) => {
-        alert("Error al conectarse al servidor");
+        toast.error('Error al conectarse al servidor', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
 };
@@ -58,12 +85,63 @@ export const updateSala = (data) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error('error');
+      })
       .then((ResData) => {
         dispatch(updateSalaData(data));
       })
       .catch((error) => {
-        alert("Error al conectarse al servidor");
+        toast.error('Error al conectarse al servidor', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
+  };
+};
+export const setMaintenanceSala = (data) => {
+  const id = toast.loading("Por favor, espere...")
+  return (dispatch) => {
+    fetch(url + "/salas/mantenimiento", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error('error');
+      })
+      .then((ResData) => {
+        toast.update(id, {
+          render: "Guardado con Éxito", type: "success", isLoading: false, position: "top-center",
+          autoClose: 3000,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        dispatch(updateSalaData(data));
+      })
+      .catch((error) => {
+        toast.update(id, {
+          render: 'Error al conectarse al servidor',
+          type: "error",
+          isLoading: false,
+          position: "top-center",
+          autoClose: 3000,
+          pauseOnHover: true,
+          progress: undefined,
+        });
+
       });
   };
 };
@@ -99,3 +177,4 @@ export const updateSalaData = (data) => {
     payload: data,
   };
 };
+

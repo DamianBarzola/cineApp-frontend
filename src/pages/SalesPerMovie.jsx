@@ -11,8 +11,9 @@ import {
 } from "../actions/film";
 import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
-const SalesPerMovie = () => {
+const SalesPerMovie = ({ handleLogOut }) => {
   const sales = useSelector((state) => state.film.list);
   const { auth } = useSelector((state) => state);
   const [isLoading, setIsLoading] = useState(true);
@@ -30,11 +31,6 @@ const SalesPerMovie = () => {
   if (isLoading) {
     return <Spinner />;
   }
-
-  const handleLogOut = () => {
-    dispatch(logout());
-    window.location.reload(); //ver para cambiar
-  };
 
   return (
     <div className="container">
@@ -65,6 +61,17 @@ const SalesPerMovie = () => {
             </div>
           </div>
           <hr />
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <div className="bg-dark pt-1">
             <div>
               <div className="d-flex row align-items-center">
