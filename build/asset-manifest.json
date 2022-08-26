@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.502a28e4.css",
+    "main.js": "/static/js/main.816c31d2.js",
+    "static/media/pororo.svg": "/static/media/pororo.da2fae82b03ad28822bbbadc9af03ae1.svg",
+    "index.html": "/index.html",
+    "main.502a28e4.css.map": "/static/css/main.502a28e4.css.map",
+    "main.816c31d2.js.map": "/static/js/main.816c31d2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.502a28e4.css",
+    "static/js/main.816c31d2.js"
+  ]
+}
