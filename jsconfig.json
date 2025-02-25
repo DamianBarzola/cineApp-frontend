@@ -1,0 +1,14 @@
+{
+  "typeAcquisition": {
+    "include": ["react", "react-dom"]
+  },
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "types": ["react", "react-dom"]
+  },
+  "include": ["src/**/*"]
+}

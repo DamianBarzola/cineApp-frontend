@@ -41,7 +41,7 @@ export const logout = () => {
     dispatch(clearShowData());
     dispatch(clearSalaData());
     dispatch(clearButacaData());
-    JSON.parse(localStorage.removeItem("user"));
+    localStorage.removeItem("user");
   };
 };
 export const errorMsg = (msg) => {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import styles from "../styles/Navbar.module.css";
-import carIcon from "../images/pororo.svg";
+import carIcon from "/pororo.svg";
 
 const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false);

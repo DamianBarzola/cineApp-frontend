@@ -5,7 +5,7 @@ const ConectionLost = () => {
   return (
     <div>
       <div
-        className="d-flex  align-items-center flex-column pt-md-5"
+        className="d-flex align-items-center flex-column pt-5"
         style={{ height: "32rem" }}
       >
         <RiWifiOffLine style={{ fontSize: "170px" }} className="pl-1 m-2" />
